@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFamilyMigrationsTable extends Migration
+class CreatePregnancyMedicalProceduresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateFamilyMigrationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('family_migrations', function (Blueprint $table) {
+        Schema::create('pregnancy_medical_procedures', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('family_id');
             $table->integer('member_id');
+            $table->smallInteger('target_type_id');
+            $table->tinyInteger('age');
             $table->integer('anganwadi_centre_id');
-            $table->timestamp('migrated_in_at');
-            $table->timestamp('migrated_out_at');
-            $table->string('migration_cause');
-            $table->boolean('active_status');
+            $table->date('procedure_date');
+            $table->string('remarks');
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ class CreateFamilyMigrationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('family_migrations');
+        Schema::dropIfExists('pregnancy_medical_procedures');
     }
 }

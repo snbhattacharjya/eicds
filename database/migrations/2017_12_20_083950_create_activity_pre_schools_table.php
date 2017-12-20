@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAnganwadiCentersTable extends Migration
+class CreateActivityPreSchoolsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateAnganwadiCentersTable extends Migration
      */
     public function up()
     {
-        Schema::create('anganwadi_centres', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('sector_code')
-            $table->string('centre_code')->unique();;
-            $table->string('centre_name')->unique();
+        Schema::create('activity_pre_schools', function (Blueprint $table) {
+            $table->integer('activity_id');
+            $table->date('preschool_date');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateAnganwadiCentersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('anganwadi_centres');
+        Schema::dropIfExists('activity_pre_schools');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFamilyMigrationsTable extends Migration
+class CreateVitaminADoseRecordsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateFamilyMigrationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('family_migrations', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('vitamin_a_dose_records', function (Blueprint $table) {
             $table->integer('family_id');
             $table->integer('member_id');
+            $table->smallInteger('target_type_id');
+            $table->tinyInteger('age');
             $table->integer('anganwadi_centre_id');
-            $table->timestamp('migrated_in_at');
-            $table->timestamp('migrated_out_at');
-            $table->string('migration_cause');
-            $table->boolean('active_status');
+            $table->integer('dose_id');
+            $table->date('dose_due_date');
+            $table->date('dose_admin_date');
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ class CreateFamilyMigrationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('family_migrations');
+        Schema::dropIfExists('vitamin_a_dose_records');
     }
 }

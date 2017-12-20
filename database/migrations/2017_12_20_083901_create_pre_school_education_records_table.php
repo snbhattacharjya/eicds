@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFamilyMigrationsTable extends Migration
+class CreatePreSchoolEducationRecordsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateFamilyMigrationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('family_migrations', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('pre_school_education_records', function (Blueprint $table) {
             $table->integer('family_id');
             $table->integer('member_id');
+            $table->smallInteger('target_type_id');
+            $table->tinyInteger('age');
             $table->integer('anganwadi_centre_id');
-            $table->timestamp('migrated_in_at');
-            $table->timestamp('migrated_out_at');
-            $table->string('migration_cause');
-            $table->boolean('active_status');
+            $table->boolean('anganwadi_resident');
+            $table->date('attendance_date');
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ class CreateFamilyMigrationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('family_migrations');
+        Schema::dropIfExists('pre_school_education_records');
     }
 }

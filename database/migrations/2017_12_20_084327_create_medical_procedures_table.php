@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAnganwadiCentersTable extends Migration
+class CreateMedicalProceduresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateAnganwadiCentersTable extends Migration
      */
     public function up()
     {
-        Schema::create('anganwadi_centres', function (Blueprint $table) {
+        Schema::create('medical_procedures', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('sector_code')
-            $table->string('centre_code')->unique();;
-            $table->string('centre_name')->unique();
+            $table->string('procedure_name')->unique();
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateAnganwadiCentersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('anganwadi_centres');
+        Schema::dropIfExists('medical_procedures');
     }
 }

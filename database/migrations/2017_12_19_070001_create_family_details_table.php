@@ -14,8 +14,8 @@ class CreateFamilyDetailsTable extends Migration
     public function up()
     {
         Schema::create('family_details', function (Blueprint $table) {
-            $table->increments('family_id');
-            $table->smallInteger('member_id');
+            $table->increments('id');
+            $table->integer('member_id');
             $table->string('aadhaar',12);
             $table->string('member_name');
             $table->string('relation',50);
@@ -24,7 +24,7 @@ class CreateFamilyDetailsTable extends Migration
             $table->date('dob');
             $table->smallInteger('target_id');
             $table->smallInteger('disability_id');
-            $table->smallInteger('anganwadi_centre_id');
+            $table->integer('anganwadi_centre_id');
             $table->string('anganwadi_resident',1);
             $table->boolean('active_status');
             $table->date('date_of_death');
