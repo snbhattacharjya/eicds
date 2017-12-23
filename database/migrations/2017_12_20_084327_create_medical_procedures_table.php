@@ -15,7 +15,7 @@ class CreateMedicalProceduresTable extends Migration
     {
         Schema::create('medical_procedures', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('procedure_name')->unique();
+            $table->string('procedure_name',50)->unique();
             $table->timestamps();
         });
     }

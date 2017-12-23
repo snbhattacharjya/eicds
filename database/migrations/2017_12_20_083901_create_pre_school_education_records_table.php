@@ -14,6 +14,7 @@ class CreatePreSchoolEducationRecordsTable extends Migration
     public function up()
     {
         Schema::create('pre_school_education_records', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('family_id');
             $table->integer('member_id');
             $table->smallInteger('target_type_id');

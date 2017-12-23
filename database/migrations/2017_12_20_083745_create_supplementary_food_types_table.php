@@ -15,7 +15,7 @@ class CreateSupplementaryFoodTypesTable extends Migration
     {
         Schema::create('supplementary_food_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('type_name',50);
+            $table->string('type_name',50)->unique();
 
             $table->timestamps();
         });

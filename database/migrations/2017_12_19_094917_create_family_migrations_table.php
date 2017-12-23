@@ -18,8 +18,8 @@ class CreateFamilyMigrationsTable extends Migration
             $table->integer('family_id');
             $table->integer('member_id');
             $table->integer('anganwadi_centre_id');
-            $table->timestamp('migrated_in_at');
-            $table->timestamp('migrated_out_at');
+            $table->timestamp('migrated_in_at')->nullable();
+            $table->timestamp('migrated_out_at')->nullable();
             $table->string('migration_cause');
             $table->boolean('active_status');
             $table->timestamps();

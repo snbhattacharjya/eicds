@@ -18,6 +18,10 @@ class CreateHealthProblemsReferralsTable extends Migration
             $table->integer('problem_id');
             $table->timestamps();
         });
+
+        Schema::table('health_problems_referrals', function (Blueprint $table) {
+            $table->primary(['referral_id','problem_id']);
+        });
     }
 
     /**

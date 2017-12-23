@@ -15,7 +15,7 @@ class CreateVitaminADosesTable extends Migration
     {
         Schema::create('vitamin_a_doses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('dose_name')->unique();
+            $table->string('dose_name',50)->unique();
             $table->smallInteger('due_month_from_birth');
             $table->timestamps();
         });

@@ -15,9 +15,9 @@ class CreateSectorsTable extends Migration
     {
         Schema::create('sectors', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('project_code');
-            $table->string('sector_code')->unique();
-            $table->string('sector_name')->unique();
+            $table->integer('project_id');
+            $table->string('sector_code',50)->unique();
+            $table->string('sector_name',50)->unique();
             $table->timestamps();
         });
     }

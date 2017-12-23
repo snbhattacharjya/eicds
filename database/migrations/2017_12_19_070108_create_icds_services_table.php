@@ -15,7 +15,7 @@ class CreateIcdsServicesTable extends Migration
     {
         Schema::create('icds_services', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('icds_service_name')->unique();
+            $table->string('icds_service_name',50)->unique();
             $table->timestamps();
         });
     }

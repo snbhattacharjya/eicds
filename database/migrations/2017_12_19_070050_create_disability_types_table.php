@@ -15,7 +15,7 @@ class CreateDisabilityTypesTable extends Migration
     {
         Schema::create('disability_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('disability_type_name')->unique();
+            $table->string('disability_type_name',50)->unique();
             $table->timestamps();
         });
     }

@@ -18,6 +18,10 @@ class CreateActivityPreSchoolsTable extends Migration
             $table->date('preschool_date');
             $table->timestamps();
         });
+
+        Schema::table('activity_pre_schools', function (Blueprint $table) {
+            $table->primary(['activity_id','preschool_date']);
+        });
     }
 
     /**

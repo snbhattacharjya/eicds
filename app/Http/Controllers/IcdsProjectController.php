@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\District;
 use App\IcdsProject;
 use Illuminate\Http\Request;
+use Session;
 
 class IcdsProjectController extends Controller
 {
@@ -14,7 +16,9 @@ class IcdsProjectController extends Controller
      */
     public function index()
     {
-        //
+        $districts = District::all();
+        $projects = IcdsProject::all();
+        return view('icdsproject.index',['districts' => $districts, 'projects' => $projects]);
     }
 
     /**
@@ -35,7 +39,21 @@ class IcdsProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+          'district_id' => 'required',
+          'project_code' => 'required|string|max:50',
+          'project_name' => 'required|string|max:50',
+        ]);
+
+        $project = new IcdsProject;
+        $project->district_id = $request->district_id;
+        $project->project_code = $request->project_code;
+        $project->project_name = $request->project_name;
+
+        $project->save();
+        Session::flash('success','Icds Project Added Successfully with ID: '.$project->id);
+
+        return redirect()->route('icdsproject.index');
     }
 
     /**

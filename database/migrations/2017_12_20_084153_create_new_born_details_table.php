@@ -27,6 +27,12 @@ class CreateNewBornDetailsTable extends Migration
             $table->date('first_weight_date');
             $table->timestamps();
         });
+
+        Schema::table('new_born_details', function (Blueprint $table) {
+            $table->primary('child_id');
+        });
+
+
     }
 
     /**

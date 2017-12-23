@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAgeWeightStatusesTable extends Migration
+class CreateAgeWeightStatusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -32,6 +32,6 @@ class CreateAgeWeightStatusesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('age_weight_statuses');
+        Schema::dropIfExists('age_weight_status');
     }
 }

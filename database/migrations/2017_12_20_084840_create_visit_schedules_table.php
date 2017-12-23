@@ -15,7 +15,7 @@ class CreateVisitSchedulesTable extends Migration
     {
         Schema::create('visit_schedules', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('schedule_name')->unique();
+            $table->string('schedule_name',100)->unique();
             $table->integer('target_type_id');
             $table->timestamps();
         });

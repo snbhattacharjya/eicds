@@ -15,9 +15,9 @@ class CreateIcdsProjectsTable extends Migration
     {
         Schema::create('icds_projects', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('district_code');
-            $table->string('project_code')->unique();
-            $table->string('project_name')->unique();
+            $table->integer('district_id');
+            $table->string('project_code',50)->unique();
+            $table->string('project_name',50)->unique();
             $table->timestamps();
         });
     }

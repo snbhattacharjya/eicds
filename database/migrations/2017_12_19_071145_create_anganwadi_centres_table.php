@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAnganwadiCentersTable extends Migration
+class CreateAnganwadiCentresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,9 +15,9 @@ class CreateAnganwadiCentersTable extends Migration
     {
         Schema::create('anganwadi_centres', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('sector_code')
-            $table->string('centre_code')->unique();;
-            $table->string('centre_name')->unique();
+            $table->integer('sector_id');
+            $table->string('centre_code',50)->unique();
+            $table->string('centre_name',50)->unique();
             $table->timestamps();
         });
     }

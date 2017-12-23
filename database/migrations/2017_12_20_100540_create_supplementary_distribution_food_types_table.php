@@ -18,6 +18,10 @@ class CreateSupplementaryDistributionFoodTypesTable extends Migration
             $table->integer('food_type_id');
             $table->timestamps();
         });
+
+        Schema::table('supplementary_distribution_food_types', function (Blueprint $table) {
+            $table->primary(['distribution_id','food_type_id'],'distribution_food_type_primary');
+        });
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\State;
 use Illuminate\Http\Request;
+use Session;
 
 class StateController extends Controller
 {
@@ -14,7 +15,8 @@ class StateController extends Controller
      */
     public function index()
     {
-        //
+        $states = State::all();
+        return view('state.index',['states' => $states]);
     }
 
     /**
@@ -35,7 +37,18 @@ class StateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+        'state_code' => 'required|string|max:10',
+        'state_name' => 'required|string|max:255',
+      ]);
+
+      $state = new State;
+      $state->state_code = $request->state_code;
+      $state->state_name = $request->state_name;
+
+      $state->save();
+      Session::flash('success','State Added Successfully with ID: '.$state->id);
+      return redirect()->route('state.index');
     }
 
     /**

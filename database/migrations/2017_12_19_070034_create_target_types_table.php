@@ -15,8 +15,8 @@ class CreateTargetTypesTable extends Migration
     {
         Schema::create('target_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('target_name_short')->unique();
-            $table->string('target_name')->unique();
+            $table->string('target_name_short',5)->unique();
+            $table->string('target_name',50)->unique();
             $table->timestamps();
         });
     }

@@ -85,6 +85,10 @@
                 <div class="links">
                     A Digital Initiative for Healthy Mother and Healthy Child
                 </div>
+
+                <div>
+                  <a href="{{ url('/start')}}" class="btn btn-lg btn-primary">Start Here</a>
+                </div>
             </div>
         </div>
     </body>

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\IcdsProject;
 use App\Sector;
 use Illuminate\Http\Request;
+use Session;
 
 class SectorController extends Controller
 {
@@ -14,7 +16,9 @@ class SectorController extends Controller
      */
     public function index()
     {
-        //
+        $projects = IcdsProject::all();
+        $sectors = Sector::all();
+        return view('sector.index',['projects' => $projects, 'sectors' => $sectors]);
     }
 
     /**
@@ -35,7 +39,21 @@ class SectorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+          'project_id' => 'required',
+          'sector_code' => 'required|string|max:50|unique:sectors',
+          'sector_name' => 'required|string|max:50|unique:sectors',
+        ]);
+
+        $sector = new Sector;
+        $sector->project_id = $request->project_id;
+        $sector->sector_code = $request->sector_code;
+        $sector->sector_name = $request->sector_name;
+
+        $sector->save();
+        Session::flash('success','Icds Project Sector Added Successfully with ID: '.$sector->id);
+
+        return redirect()->route('sector.index');
     }
 
     /**

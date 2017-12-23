@@ -15,7 +15,7 @@ class CreateVaccinationsTable extends Migration
     {
         Schema::create('vaccinations', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('vaccination_name')->unique();
+            $table->string('vaccination_name',50)->unique();
             $table->smallInteger('due_month_from_birth');
             $table->timestamps();
         });

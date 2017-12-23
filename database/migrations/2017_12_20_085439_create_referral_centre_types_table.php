@@ -15,7 +15,7 @@ class CreateReferralCentreTypesTable extends Migration
     {
         Schema::create('referral_centre_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('type_name')->unique();
+            $table->string('type_name',50)->unique();
             $table->timestamps();
         });
     }
