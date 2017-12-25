@@ -8,40 +8,42 @@
           <div class="page-header">
             <h1>Icds Project Sectors <small></small></h1>
           </div>
-          <form class="form-inline" method="POST" action="{{ route('sector.store') }}">
+          <form class="form-inline" method="POST" action="{{ route('anganwadicentre.store') }}">
               {{ csrf_field() }}
 
-            <div class="form-group{{ $errors->has('district_id') ? ' has-error' : '' }}">
-              <label for="project_id" class="control-label">Project: </label>
-              <select class="form-control" id="project_id" name="project_id" required autofocus>
-                <option value="">--Select Project--</option>
-                @foreach ($projects as $project)
-                  <option value="{{$project->id}}">{{$project->district->state->state_name}}/{{$project->district->district_name}}/{{$project->project_name}}</option>
+            <div class="form-group{{ $errors->has('sector_id') ? ' has-error' : '' }}">
+              <label for="sector_id" class="control-label">Project/Sector: </label>
+              <select class="form-control" id="sector_id" name="sector_id" required autofocus>
+                <option value="">--Select Sector--</option>
+                @foreach ($sectors as $sector)
+                  <option value="{{$sector->id}}">{{$sector->project->project_name}}/{{$sector->sector_name}}</option>
                 @endforeach
               </select>
-              @if ($errors->has('project_id'))
+              @if ($errors->has('sector_id'))
                   <span class="help-block">
-                      <strong>{{ $errors->first('project_id') }}</strong>
+                      <strong>{{ $errors->first('sector_id') }}</strong>
                   </span>
               @endif
             </div>
 
-            <div class="form-group{{ $errors->has('sector_code') ? ' has-error' : '' }}">
-              <label for="sector_code" class="control-label">Sector Code: </label>
-              <input type="text" class="form-control" id="sector_code" name="sector_code" placeholder="Sector Code" value="{{ old('sector_code') }}" required autofocus>
-              @if ($errors->has('sector_code'))
+            <div class="form-group{{ $errors->has('centre_code') ? ' has-error' : '' }}">
+              <label for="centre_code" class="control-label">Centre Code: </label>
+              <input type="text" class="form-control" id="centre_code" name="centre_code" placeholder="Centre Code" value="{{ old('centre_code') }}" required autofocus>
+
+              @if ($errors->has('centre_code'))
                   <span class="help-block">
-                      <strong>{{ $errors->first('sector_code') }}</strong>
+                      <strong>{{ $errors->first('centre_code') }}</strong>
                   </span>
               @endif
             </div>
 
-            <div class="form-group{{ $errors->has('sector_name') ? ' has-error' : '' }}">
-              <label for="sector_name" class="control-label">Sector Name: </label>
-              <input type="text" class="form-control" id="sector_name" name="sector_name" placeholder="Sector Name" value="{{ old('sector_name') }}" required autofocus>
-              @if ($errors->has('sector_name'))
+            <div class="form-group{{ $errors->has('centre_name') ? ' has-error' : '' }}">
+              <label for="sector_name" class="control-label">Centre Name: </label>
+              <input type="text" class="form-control" id="sector_name" name="centre_name" placeholder="Centre Name" value="{{ old('centre_name') }}" required autofocus>
+
+              @if ($errors->has('centre_name'))
                   <span class="help-block">
-                      <strong>{{ $errors->first('sector_name') }}</strong>
+                      <strong>{{ $errors->first('centre_name') }}</strong>
                   </span>
               @endif
             </div>
@@ -68,9 +70,9 @@
               </tr>
             </thead>
             <tbody>
-              @foreach ($sectors as $sector)
+              @foreach ($centres as $centre)
                 <tr>
-                  <td>{{$sector->id}}</td>
+                  <td>{{$centre->id}}</td>
                   <td>{{$centre->sector->project->district->state->state_name}}</td>
                   <td>{{$centre->sector->project->district->district_name}}</td>
                   <td>{{$centre->sector->project->project_name}}</td>

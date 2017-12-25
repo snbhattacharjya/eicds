@@ -36,3 +36,6 @@ Route::post('/sector', 'SectorController@store')->name('sector.store');
 //Anganwadi Centres
 Route::get('/anganwadicentre', 'AnganwadiCentreController@index')->name('anganwadicentre.index');
 Route::post('/anganwadicentre', 'AnganwadiCentreController@store')->name('anganwadicentre.store');
+
+//Family Register
+Route::get('/familydetail', 'FamilyDetailController@index')->name('familydetail.index');
