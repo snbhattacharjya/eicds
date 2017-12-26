@@ -15,14 +15,20 @@ class CategorySeeder extends Seeder
       DB::table('categories')->insert([
           'category_code' => 'SC',
           'category_name' => 'Scheduled Caste',
+          'created_at' => now(),
+          'updated_at' => now(),
       ]);
       DB::table('categories')->insert([
           'category_code' => 'ST',
           'category_name' => 'Scheduled Tribe',
+          'created_at' => now(),
+          'updated_at' => now(),
       ]);
       DB::table('categories')->insert([
           'category_code' => 'OTH',
           'category_name' => 'Others',
+          'created_at' => now(),
+          'updated_at' => now(),
       ]);
     }
 }

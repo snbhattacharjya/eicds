@@ -13,15 +13,23 @@ class SupplementaryFoodTypeSeeder extends Seeder
     {
       DB::table('supplementary_food_types')->insert([
         'type_name' => 'Breakfast',
+        'created_at' => now(),
+        'updated_at' => now(),
       ]);
       DB::table('supplementary_food_types')->insert([
         'type_name' => 'Hot Cooked Meal',
+        'created_at' => now(),
+        'updated_at' => now(),
       ]);
       DB::table('supplementary_food_types')->insert([
         'type_name' => 'Ready To Eat Food',
+        'created_at' => now(),
+        'updated_at' => now(),
       ]);
       DB::table('supplementary_food_types')->insert([
         'type_name' => 'Take Home Ration',
+        'created_at' => now(),
+        'updated_at' => now(),
       ]);
     }
 }

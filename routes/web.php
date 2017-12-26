@@ -39,3 +39,5 @@ Route::post('/anganwadicentre', 'AnganwadiCentreController@store')->name('anganw
 
 //Family Register
 Route::get('/familydetail', 'FamilyDetailController@index')->name('familydetail.index');
+Route::get('/familydetail/create', 'FamilyDetailController@create')->name('familydetail.create');
+Route::post('/familydetail', 'FamilyDetailController@store')->name('familydetail.store');

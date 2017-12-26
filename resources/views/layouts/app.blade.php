@@ -53,7 +53,7 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Anganwadi Centre Registers  <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Reg 1 - Family Register</a></li>
+                  <li><a href="{{url('/familydetail')}}">Reg 1 - Family Register</a></li>
                   <li><a href="#">Reg 2 - Supplementary Food Stock</a></li>
                   <li><a href="#">Reg 3 - Supplementray Food Distribution</a></li>
                   <li><a href="#">Reg 4 - Preschool Education</a></li>
