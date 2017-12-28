@@ -31,7 +31,10 @@
                   <td>{{$family->category->category_name}}</td>
                   <td>{{$family->address}}</td>
                   <td>{{$family->village_town_name}}</td>
-                  <td><a href="#" class="btn btn-sm btn-info">View</a></td>
+                  <td><a href="#" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{{route('familydetail.showMembers',['family_id' => $family->id])}}" class="btn btn-sm btn-info">Members</a>
+                    <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                  </td>
                 </tr>
               @endforeach
             </tbody>

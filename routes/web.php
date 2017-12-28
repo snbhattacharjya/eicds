@@ -41,3 +41,7 @@ Route::post('/anganwadicentre', 'AnganwadiCentreController@store')->name('anganw
 Route::get('/familydetail', 'FamilyDetailController@index')->name('familydetail.index');
 Route::get('/familydetail/create', 'FamilyDetailController@create')->name('familydetail.create');
 Route::post('/familydetail', 'FamilyDetailController@store')->name('familydetail.store');
+Route::get('/familydetail/{familydetail}/members', 'FamilyDetailController@showMembers')->name('familydetail.showMembers');
+
+//Member
+Route::post('/member', 'MemberController@store')->name('member.store');

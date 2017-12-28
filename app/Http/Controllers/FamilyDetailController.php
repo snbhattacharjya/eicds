@@ -157,4 +157,13 @@ class FamilyDetailController extends Controller
     {
         //
     }
+
+    public function showMembers(int $family_id)
+    {
+        $categories = Category::all();
+        $disabilities = DisabilityType::all();
+        $targets = TargetType::all();
+        $members = Member::where('family_id',$family_id)->get();
+        return view('familydetail.show_members',['members' => $members, 'disabilities' => $disabilities, 'targets' => $targets, 'family_id' => $family_id]);
+    }
 }

@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Member;
 use Illuminate\Http\Request;
+use Session;
 
-class MembersController extends Controller
+class MemberController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +36,38 @@ class MembersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+        'member_name' => 'required|string|max:255',
+        'relation' => 'required|string|max:255',
+        'aadhaar' => 'required|digits:12',
+        'gender' => 'required',
+        'dob' => 'date_format:d/m/Y|before:tomorrow',
+        'marital_status' => 'required|string',
+        'target_id' => 'required|string',
+        'disability_id' => 'required|string',
+        'anganwadi_resident' => 'required|string',
+        'mobile' => 'required|digits:10',
+      ]);
+
+      $member =  new Member;
+      $member->family_id = $request->family_id;
+      $member->name = $request->member_name;
+      $member->aadhaar = $request->aadhaar;
+      $member->gender = $request->gender;
+      $member->dob = date_format(date_create_from_format('d/m/Y',$request->dob),'Y-m-d');
+      $member->marital_status = $request->marital_status;
+      $member->target_id = $request->target_id;
+      $member->disability_id = $request->disability_id;
+      $member->anganwadi_resident = $request->anganwadi_resident;
+      $member->mobile = $request->mobile;
+      $member->relation = $request->relation;
+      $member->anganwadi_centre_id = 1;
+      $member->active_status = 1;
+
+      $member->save();
+
+      Session::flash('success','Member Added Successfully with ID: '.$member->id);
+      return redirect()->route('familydetail.showMembers',['family_id' => $member->family_id]);
     }
 
     /**
