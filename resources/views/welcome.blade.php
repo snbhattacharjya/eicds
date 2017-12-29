@@ -5,11 +5,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>eICDS</title>
+        <title>eIcds | Home</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
+        <link href="{{asset('css/font-awesome.css')}}" rel="stylesheet" type="text/css">
         <!-- Styles -->
         <style>
             html, body {
@@ -62,26 +62,18 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
-
-            .top_head {
-                background: #f7f7f7;
-                display: block;
-                border-bottom: 1px solid #ebebeb;
-                height: 30px;
-                font-size: 1.2em;
-            }
         </style>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
-                    @auth
+                    @if (Auth::check())
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
+                        <a href="{{ url('/login') }}">Login</a>
+                        <a href="{{ url('/register') }}">Register</a>
+                    @endif
                 </div>
             @endif
 
@@ -94,8 +86,8 @@
                     A Digital Initiative for Healthy Mother and Healthy Child
                 </div>
 
-                <div>
-                  <a href="{{ url('/start')}}" class="btn btn-lg btn-primary">Start Here</a>
+                <div class="small">
+                  <a href="{{url('/start')}}"><i class="fa fa-link"></i> Start Here</a>
                 </div>
             </div>
         </div>
