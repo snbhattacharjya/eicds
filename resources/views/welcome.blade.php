@@ -62,6 +62,14 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .top_head {
+                background: #f7f7f7;
+                display: block;
+                border-bottom: 1px solid #ebebeb;
+                height: 30px;
+                font-size: 1.2em;
+            }
         </style>
     </head>
     <body>
