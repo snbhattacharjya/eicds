@@ -48,3 +48,17 @@ Route::get('/familydetail/{familydetail}/members', 'FamilyDetailController@showM
 
 //Member
 Route::post('/member', 'MemberController@store')->name('member.store');
+
+//Food Distribution
+Route::get('/fooddistribution', 'SupplementaryFoodDistributionController@index')->name('fooddistribution.index');
+Route::get('/fooddistribution/{member}/create', 'SupplementaryFoodDistributionController@create')->name('fooddistribution.create');
+Route::post('/fooddistribution', 'SupplementaryFoodDistributionController@store')->name('fooddistribution.store');
+
+//PreSchoolEducationRecord
+Route::get('/preschooleducation', 'PreSchoolEducationRecordController@index')->name('preschooleducation.index');
+Route::get('/PreSchoolEducationRecordController/{member}/create', 'PreSchoolEducationRecordController@create')->name('preschooleducation.create');
+Route::post('/preschooleducation', 'PreSchoolEducationRecordController@store')->name('preschooleducation.store');
+
+//Preschool activity
+Route::post('/preschoolactivity', 'PreSchoolActivityController@store')->name('preschoolactivity.store');
+Route::post('/activitypreschool', 'ActivityPreSchoolController@store')->name('activitypreschool.store');

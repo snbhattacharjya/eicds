@@ -18,9 +18,9 @@ class CreatePreSchoolEducationRecordsTable extends Migration
             $table->integer('family_id');
             $table->integer('member_id');
             $table->smallInteger('target_type_id');
-            $table->tinyInteger('age');
+            $table->float('age');
             $table->integer('anganwadi_centre_id');
-            $table->boolean('anganwadi_resident');
+            $table->enum('anganwadi_resident',['Y','N']);
             $table->date('attendance_date');
             $table->timestamps();
         });

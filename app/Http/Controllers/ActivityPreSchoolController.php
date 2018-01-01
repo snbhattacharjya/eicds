@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ActivityPreSchool;
 use Illuminate\Http\Request;
+use Session;
 
 class ActivityPreSchoolController extends Controller
 {
@@ -35,7 +36,17 @@ class ActivityPreSchoolController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+        'activity_id' => 'required|string|max:255',
+        'preschool_date' => 'date_format:d/m/Y|before:tomorrow',
+      ]);
+      $activity_preschool = new ActivityPreSchool;
+      $activity_preschool->preschool_date = date_format(date_create_from_format('d/m/Y',$request->preschool_date),'Y-m-d');
+      $activity_preschool->activity_id = $request->activity_id;
+      $activity_preschool->save();
+
+      Session::flash('success', 'New PreSchool Day Added Successfully on: '.$activity_preschool->preschool_date);
+      return redirect()->route('preschooleducation.create',['member' => $request->member_id]);
     }
 
     /**

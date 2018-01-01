@@ -20,7 +20,7 @@ class CreatePregnancyDeliveryRecordsTable extends Migration
             $table->smallInteger('target_type_id');
             $table->tinyInteger('age');
             $table->integer('anganwadi_centre_id');
-            $table->boolean('anganwadi_resident');
+            $table->enum('anganwadi_resident',['Y','N']);
             $table->date('anganwadi_registration_date');
             $table->tinyInteger('pregnancy_order');
             $table->date('lmp_date');

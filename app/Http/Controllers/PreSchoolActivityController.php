@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\PreSchoolActivity;
 use Illuminate\Http\Request;
-
+use Session;
 class PreSchoolActivityController extends Controller
 {
     /**
@@ -35,7 +35,15 @@ class PreSchoolActivityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+          'activity_name' => 'required|string|max:255',
+        ]);
+        $activity = new PreSchoolActivity;
+        $activity->activity_name = $request->activity_name;
+        $activity->save();
+
+        Session::flash('success', 'New PreSchool Activity Added Successfully with ID: '.$activity->id);
+        return redirect()->route('preschooleducation.create',['member' => $request->member_id]);
     }
 
     /**

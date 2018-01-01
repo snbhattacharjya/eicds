@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\SupplementaryFoodDistribution;
 use Illuminate\Http\Request;
+use App\Member;
+use App\SupplementaryFoodType;
+use Session;
 
 class SupplementaryFoodDistributionController extends Controller
 {
@@ -14,7 +17,12 @@ class SupplementaryFoodDistributionController extends Controller
      */
     public function index()
     {
-        //
+        $members = Member::where([
+            ['active_status', '=', 1],
+            ['target_id', '<>', 5],
+            ['anganwadi_centre_id', '=', 1],
+          ])->get();
+        return view('fooddistribution.index',['members' => $members]);
     }
 
     /**
@@ -22,9 +30,11 @@ class SupplementaryFoodDistributionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(int $member_id)
     {
-        //
+        $member = Member::find($member_id);
+        $food_types = SupplementaryFoodType::all();
+        return view('fooddistribution.create',['member' => $member, 'food_types' => $food_types]);
     }
 
     /**
@@ -35,7 +45,29 @@ class SupplementaryFoodDistributionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+          'food_type' => 'required',
+          'ration_given_quantity' => 'required',
+          'ration_given_date' => 'date_format:d/m/Y|before:tomorrow',
+        ]);
+
+        $member =  Member::find($request->member_id);
+        $distribution = new SupplementaryFoodDistribution;
+        $distribution->family_id = $member->family_id;
+        $distribution->member_id = $member->id;
+        $distribution->target_type_id = $member->target_id;
+        $distribution->anganwadi_resident = $member->anganwadi_resident;
+
+        $age = date_diff(date_create($member->dob), date_create(date("Y-m-d")))->y;
+        $distribution->age = $age;
+        $distribution->ration_given_quantity = $request->ration_given_quantity;
+        $distribution->ration_given_date = date_format(date_create_from_format('d/m/Y',$request->ration_given_date),'Y-m-d');
+        $distribution->anganwadi_centre_id = 1;
+
+        $distribution->save();
+        $distribution->saveFoodType($request->food_type);
+        Session::flash('success','Food Distribution Added Successfully with ID: '.$distribution->id);
+        return redirect()->route('fooddistribution.create',['member' => $member->id]);
     }
 
     /**
