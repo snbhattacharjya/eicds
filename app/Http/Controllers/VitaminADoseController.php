@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\VitaminADose;
 use Illuminate\Http\Request;
+use Session;
 
 class VitaminADoseController extends Controller
 {
@@ -35,7 +36,18 @@ class VitaminADoseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+        'dose_name' => 'required|string|max:255',
+        'due_month_from_birth' => 'required|numeric',
+      ]);
+
+      $dose = new VitaminADose;
+      $dose->dose_name = $request->dose_name;
+      $dose->due_month_from_birth = $request->due_month_from_birth;
+
+      $dose->save();
+      Session::flash('success','New Vitamin A Dose Added Successfully with ID:'.$dose->id);
+      return redirect()->route('vitamina.create',['member' => $request->member_id]);
     }
 
     /**

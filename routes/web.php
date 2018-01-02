@@ -62,3 +62,19 @@ Route::post('/preschooleducation', 'PreSchoolEducationRecordController@store')->
 //Preschool activity
 Route::post('/preschoolactivity', 'PreSchoolActivityController@store')->name('preschoolactivity.store');
 Route::post('/activitypreschool', 'ActivityPreSchoolController@store')->name('activitypreschool.store');
+
+//Immunization Record
+Route::get('/immunization', 'ImmunizationRecordController@index')->name('immunization.index');
+Route::get('/immunization/{member}/create', 'ImmunizationRecordController@create')->name('immunization.create');
+Route::post('/immunization', 'ImmunizationRecordController@store')->name('immunization.store');
+
+//Vaccination
+Route::post('/vaccination', 'VaccinationController@store')->name('vaccination.store');
+
+//Vitamin A Record
+Route::get('/vitamina', 'VitaminADoseRecordController@index')->name('vitamina.index');
+Route::get('/vitamina/{member}/create', 'VitaminADoseRecordController@create')->name('vitamina.create');
+Route::post('/vitamina', 'VitaminADoseRecordController@store')->name('vitamina.store');
+
+//Vitamin A Doses
+Route::post('/vitaminadose', 'VitaminADoseController@store')->name('vitaminadose.store');
