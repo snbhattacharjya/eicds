@@ -1,112 +1,171 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html >
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Site made with Mobirise Website Builder v4.5.4, # -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Mobirise v4.5.4, mobirise.com">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <link rel="shortcut icon" href="{{asset('mobirise/images/icds-logo-transparent1-689x661.png')}}" type="image/x-icon">
+  <meta name="description" content="">
+  <title>Home</title>
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
-    <title>{{ config('app.name', 'Laravel') }}</title>
+  <link rel="stylesheet" href="{{asset('mobirise/web/assets/mobirise-icons-bold/mobirise-icons-bold.css')}}">
+  <link rel="stylesheet" href="{{asset('mobirise/web/assets/mobirise-icons/mobirise-icons.css')}}">
+  <link rel="stylesheet" href="{{asset('mobirise/tether/tether.min.css')}}">
+  <link rel="stylesheet" href="{{asset('mobirise/bootstrap/css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{asset('mobirise/bootstrap/css/bootstrap-grid.min.css')}}">
+  <link rel="stylesheet" href="{{asset('mobirise/bootstrap/css/bootstrap-reboot.min.css')}}">
+  <link rel="stylesheet" href="{{asset('mobirise/dropdown/css/style.css')}}">
+  <link rel="stylesheet" href="{{asset('mobirise/socicon/css/styles.css')}}">
+  <link rel="stylesheet" href="{{asset('mobirise/animatecss/animate.min.css')}}">
+  <link rel="stylesheet" href="{{asset('mobirise/theme/css/style.css')}}">
+  <link rel="stylesheet" href="{{asset('mobirise/mobirise/css/mbr-additional.css')}}" type="text/css">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style media="screen">
-      .navbar{
-        min-height: 15px;
-        box-shadow: 0px 0px 6px 0px black;
-      }
-    </style>
+
+
 </head>
 <body>
-    <div id="app">
-      <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{url('/start')}}">{{config('app.name')}}</a>
-          </div>
+<section class="menu cid-qFFl7Z51jP" once="menu" id="menu1-e">
 
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Environment <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="{{route('state.index')}}">States</a></li>
-                  <li><a href="{{route('district.index')}}">Districts</a></li>
-                  <li><a href="{{route('icdsproject.index')}}">ICDS Projects</a></li>
-                  <li><a href="{{route('sector.index')}}">Sectors</a></li>
-                  <li><a href="{{route('anganwadicentre.index')}}">Anganwadi Centres</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Project Settings  <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Caste Category</a></li>
-                  <li><a href="#">Target Types</a></li>
-                  <li><a href="#">Disability Types</a></li>
-                  <li><a href="#">ICDS Services</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Anganwadi Centre Registers  <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="{{url('/familydetail')}}">Reg 1 - Family Register</a></li>
-                  <li><a href="#">Reg 2 - Supplementary Food Stock</a></li>
-                  <li><a href="{{url('/fooddistribution')}}">Reg 3 - Supplementray Food Distribution</a></li>
-                  <li><a href="{{url('/preschooleducation')}}">Reg 4 - Preschool Education</a></li>
-                  <li><a href="#">Reg 5 - Pregnancy and Delivery Records</a></li>
-                  <li><a href="{{url('/immunization')}}">Reg 6 - Immunization and VHND</a></li>
-                  <li><a href="{{url('/vitamina')}}">Reg 7 - Vitamin A Biannual Rounds</a></li>
-                  <li><a href="#">Reg 8 - Home Visit Planner</a></li>
-                  <li><a href="#">Reg 9 - Case Management and Referrals</a></li>
-                  <li><a href="#">Reg 10 - Weight Records for Children</a></li>
-                </ul>
-              </li>
-            <!--</ul> -->
 
-            <!--<ul class="nav navbar-nav navbar-right"> -->
-              <!-- Authentication Links -->
-              @guest
-                  <li><a href="{{ route('login') }}">Login</a></li>
-                  <li><a href="{{ route('register') }}">Register</a></li>
-              @else
-                  <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                          {{ Auth::user()->name }} <span class="caret"></span>
-                      </a>
 
-                      <ul class="dropdown-menu">
-                          <li>
-                              <a href="{{ route('logout') }}"
-                                  onclick="event.preventDefault();
-                                           document.getElementById('logout-form').submit();">
-                                  Logout
-                              </a>
+    <nav class="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
+        <div class="menu-logo">
+            <div class="navbar-brand">
+                <span class="navbar-logo">
 
-                              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                  {{ csrf_field() }}
-                              </form>
-                          </li>
+                         <img src="{{asset('mobirise/images/icds-logo-transparent1-689x661.png')}}" alt="eicds" title="eIcds" style="height: 3.8rem;">
+
+                </span>
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-5" href="#">
+                        eIcds</a></span>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
+                        <li class="nav-item"><a class="nav-link link text-white display-4" href="#"><span class="mbri-home mbr-iconfont mbr-iconfont-btn"></span>
+                        Home&nbsp;</a></li>
+                        <li class="nav-item"><a class="nav-link link text-white display-4" href="#"><span class="mbri-laptop mbr-iconfont mbr-iconfont-btn"></span>
+                        MIS &nbsp;</a></li>
+                        <li class="nav-item"><a class="nav-link link text-white display-4" href="#"><span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>
+                        AWC Locator &nbsp;</a></li>
+                        <li class="nav-item"><a class="nav-link link text-white display-4" href="#"><span class="mbri-question mbr-iconfont mbr-iconfont-btn"></span>
+                        RTI&nbsp;</a></li>
+                        @if (Auth::check())
+                          <li class="nav-item"><a class="nav-link link text-white display-4" href="{{ url('/home') }}"><span class="mbri-user mbr-iconfont mbr-iconfont-btn"></span>
+                          Go to My Account &nbsp;</a></li>
+                        @else
+                          <li class="nav-item"><a class="nav-link link text-white display-4" href="{{ url('/login') }}"><span class="mbri-login mbr-iconfont mbr-iconfont-btn"></span>
+                          Login &nbsp;</a></li>
+                          <li class="nav-item"><a class="nav-link link text-white display-4" href="{{ url('/register') }}"><span class="mbri-touch mbr-iconfont mbr-iconfont-btn"></span>
+                          Register &nbsp;</a></li>
+                        @endif
                       </ul>
-                  </li>
-              @endguest
-            </ul>
-          </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-        </nav>
-        @yield('content')
-    </div>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-</body>
+        </div>
+    </nav>
+</section>
+
+<!--<section class="engine"><a href="https://mobirise.co/j">how to design your own website</a></section>-->
+  @yield('content')
+<section class="cid-qFFl80HSb5" id="footer1-g">
+    <div class="container">
+        <div class="media-container-row content text-white">
+            <div class="col-12 col-md-3">
+                <div class="media-wrap">
+                    <a href="#/">
+                        <img src="{{asset('mobirise/images/icds-logo-transparent1-689x661.png')}}" alt="Mobirise" title="">
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-md-3 mbr-fonts-style display-7">
+                <h5 class="pb-3">
+                    Address
+                </h5>
+                <p class="mbr-text">Chinsurah, Hooghly<br>West Bengal<br>Pin - 712101</p>
+            </div>
+            <div class="col-12 col-md-3 mbr-fonts-style display-7">
+                <h5 class="pb-3">
+                    Contacts
+                </h5>
+                <p class="mbr-text">
+                    Email: support@eicds.gov.in<br>Phone: +1 (0) 000 0000 001
+                    <br>Fax: +1 (0) 000 0000 002
+                </p>
+            </div>
+            <div class="col-12 col-md-3 mbr-fonts-style display-7">
+                <h5 class="pb-3">
+                    Links
+                </h5>
+                <p class="mbr-text"><a href="http://india.gov.in">india.gov.in</a><br><a href="http://mygov.in" target="_blank">mygov.in</a><br><a href="http://nic.in">nic.in</a></p>
+            </div>
+        </div>
+        <div class="footer-lower">
+            <div class="media-container-row">
+                <div class="col-sm-12">
+                    <hr>
+                </div>
+            </div>
+            <div class="media-container-row mbr-white">
+                <div class="col-sm-6 copyright">
+                    <p class="mbr-text mbr-fonts-style display-7">
+                        © Copyright 2017 National Inormatics Centre - All Rights Reserved
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <div class="social-list align-right">
+                        <div class="soc-item">
+                            <a href="https://twitter.com/mobirise" target="_blank">
+                                <span class="socicon-twitter socicon mbr-iconfont mbr-iconfont-social"></span>
+                            </a>
+                        </div>
+                        <div class="soc-item">
+                            <a href="https://www.facebook.com/pages/Mobirise/1616226671953247" target="_blank">
+                                <span class="socicon-facebook socicon mbr-iconfont mbr-iconfont-social"></span>
+                            </a>
+                        </div>
+                        <div class="soc-item">
+                            <a href="https://www.youtube.com/c/mobirise" target="_blank">
+                                <span class="socicon-youtube socicon mbr-iconfont mbr-iconfont-social"></span>
+                            </a>
+                        </div>
+                        <div class="soc-item">
+                            <a href="https://instagram.com/mobirise" target="_blank">
+                                <span class="socicon-instagram socicon mbr-iconfont mbr-iconfont-social"></span>
+                            </a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+  <script src="{{asset('mobirise/web/assets/jquery/jquery.min.js')}}"></script>
+  <script src="{{asset('mobirise/popper/popper.min.js')}}"></script>
+  <script src="{{asset('mobirise/tether/tether.min.js')}}"></script>
+  <script src="{{asset('mobirise/bootstrap/js/bootstrap.min.js')}}"></script>
+  <script src="{{asset('mobirise/dropdown/js/script.min.js')}}"></script>
+  <script src="{{asset('mobirise/viewportchecker/jquery.viewportchecker.js')}}"></script>
+  <script src="{{asset('mobirise/parallax/jarallax.min.js')}}"></script>
+  <script src="{{asset('mobirise/smoothscroll/smooth-scroll.js')}}"></script>
+  <script src="{{asset('mobirise/touchswipe/jquery.touch-swipe.min.js')}}"></script>
+  <script src="{{asset('mobirise/theme/js/script.js')}}"></script>
+  <script src="{{asset('mobirise/formoid/formoid.min.js')}}"></script>
+
+
+ <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i></i></a></div>
+    <input name="animation" type="hidden">
+  </body>
 </html>
