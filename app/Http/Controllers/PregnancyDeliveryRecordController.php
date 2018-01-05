@@ -17,9 +17,10 @@ class PregnancyDeliveryRecordController extends Controller
     {
         $members = Member::where([
             ['active_status', '=', 1],
-            ['target_id', '=', 3],
             ['anganwadi_centre_id', '=', 1],
-          ])->get();
+          ])
+          ->whereIn('target_id', [1,2])
+          ->get();
         return view('pregnancydelivery.index',['members' => $members]);
     }
 
@@ -31,8 +32,8 @@ class PregnancyDeliveryRecordController extends Controller
     public function create()
     {
         $member = Member::find($member_id);
-        //$vaccinations = Vaccination::all();
-        return view('immunization.create',['member' => $member, 'vaccinations' => $vaccinations]);
+
+        return view('pregnancydelivery.create',['member' => $member]);
     }
 
     /**
@@ -76,9 +77,16 @@ class PregnancyDeliveryRecordController extends Controller
      * @param  \App\PregnancyDeliveryRecord  $pregnancyDeliveryRecord
      * @return \Illuminate\Http\Response
      */
-    public function show(PregnancyDeliveryRecord $pregnancyDeliveryRecord)
+    public function show(int $member_id)
     {
-        //
+        $member = Member::find($member_id);
+        $pd_records = PregnancyDeliveryRecord::where([
+          ['member_id', '=', $member_id],
+        ])->get();
+        $medical_records = PregnancyMedicalProcedures::where([
+          ['member_id', '=', $member_id],
+        ])->get();
+        return view('pregnancydelivery.show',['member' => $member, 'medical_records' => $medical_records]);
     }
 
     /**
