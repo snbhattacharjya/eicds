@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\PregnancyDeliveryRecord;
 use Illuminate\Http\Request;
-
+use App\Member;
+use Session;
 class PregnancyDeliveryRecordController extends Controller
 {
     /**
@@ -14,7 +15,12 @@ class PregnancyDeliveryRecordController extends Controller
      */
     public function index()
     {
-        //
+        $members = Member::where([
+            ['active_status', '=', 1],
+            ['target_id', '=', 3],
+            ['anganwadi_centre_id', '=', 1],
+          ])->get();
+        return view('pregnancydelivery.index',['members' => $members]);
     }
 
     /**
@@ -24,7 +30,9 @@ class PregnancyDeliveryRecordController extends Controller
      */
     public function create()
     {
-        //
+        $member = Member::find($member_id);
+        //$vaccinations = Vaccination::all();
+        return view('immunization.create',['member' => $member, 'vaccinations' => $vaccinations]);
     }
 
     /**
@@ -35,7 +43,31 @@ class PregnancyDeliveryRecordController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+        'vaccination_id' => 'required',
+        'due_date' => 'date_format:d/m/Y|before:tomorrow',
+        'admin_date' => 'date_format:d/m/Y|before:tomorrow',
+      ]);
+
+      $vaccinations = Vaccination::all();
+
+      $member =  Member::find($request->member_id);
+      $immunization = new ImmunizationRecord;
+      $immunization->family_id = $member->family_id;
+      $immunization->member_id = $member->id;
+      $immunization->target_type_id = $member->target_id;
+
+      $age = date_diff(date_create($member->dob), date_create(date("Y-m-d")))->m/12;
+
+      $immunization->age = $age;
+      $immunization->vaccination_id = $request->vaccination_id;
+      $immunization->vaccination_due_date = date_format(date_create_from_format('d/m/Y',$request->due_date),'Y-m-d');
+      $immunization->vaccination_admin_date = date_format(date_create_from_format('d/m/Y',$request->admin_date),'Y-m-d');
+      $immunization->anganwadi_centre_id = 1;
+
+      $immunization->save();
+      Session::flash('success','Immunization Record Added Successfully with ID: '.$immunization->id);
+      return redirect()->route('immunization.create',['member' => $member->id]);
     }
 
     /**

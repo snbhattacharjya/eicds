@@ -7,12 +7,12 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+    <link rel='shortcut icon' type='image/x-icon' href='{{asset('/favicon.ico')}}' />
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
+    </head>
 <body>
     <div id="app">
       <nav class="navbar navbar-default navbar-static-top">
@@ -57,12 +57,12 @@
                   <li><a href="#">Reg 2 - Supplementary Food Stock</a></li>
                   <li><a href="{{url('/fooddistribution')}}">Reg 3 - Supplementray Food Distribution</a></li>
                   <li><a href="{{url('/preschooleducation')}}">Reg 4 - Preschool Education</a></li>
-                  <li><a href="#">Reg 5 - Pregnancy and Delivery Records</a></li>
+                  <li><a href="{{url('/pregnancydelivery')}}">Reg 5 - Pregnancy and Delivery Records</a></li>
                   <li><a href="{{url('/immunization')}}">Reg 6 - Immunization and VHND</a></li>
                   <li><a href="{{url('/vitamina')}}">Reg 7 - Vitamin A Biannual Rounds</a></li>
                   <li><a href="#">Reg 8 - Home Visit Planner</a></li>
                   <li><a href="#">Reg 9 - Case Management and Referrals</a></li>
-                  <li><a href="#">Reg 10 - Weight Records for Children</a></li>
+                  <li><a href="{{url('/weightrecord')}}">Reg 10 - Weight Records for Children</a></li>
                 </ul>
               </li>
             </ul>

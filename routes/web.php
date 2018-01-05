@@ -81,3 +81,8 @@ Route::post('/vitamina', 'VitaminADoseRecordController@store')->name('vitamina.s
 
 //Vitamin A Doses
 Route::post('/vitaminadose', 'VitaminADoseController@store')->name('vitaminadose.store');
+
+//PregnancyDeliveryRecord
+Route::get('/pregnancydelivery', 'PregnancyDeliveryRecordController@index')->name('pregnancydelivery.index');
+Route::get('/pregnancydelivery/{member}/create', 'PregnancyDeliveryRecordController@create')->name('pregnancydelivery.create');
+Route::post('/pregnancydelivery', 'PregnancyDeliveryRecordController@store')->name('pregnancydelivery.store');
