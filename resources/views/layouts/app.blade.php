@@ -27,7 +27,7 @@
               <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="{{url('/start')}}">
+            <a class="navbar-brand" href="{{url('/')}}">
               <img alt="{{config('app.name')}}" src="{{asset('mobirise/images/icds-logo-transparent1-689x661.png')}}" height="25" width="25">
             </a>
             <a class="navbar-brand" href="{{url('/start')}}">{{config('app.name')}}</a>
