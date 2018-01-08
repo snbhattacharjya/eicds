@@ -6,6 +6,9 @@ use App\PregnancyDeliveryRecord;
 use Illuminate\Http\Request;
 use App\Member;
 use Session;
+use App\MedicalProcedure;
+use App\PregnancyAntenatalCheckup;
+
 class PregnancyDeliveryRecordController extends Controller
 {
     /**
@@ -19,7 +22,7 @@ class PregnancyDeliveryRecordController extends Controller
             ['active_status', '=', 1],
             ['anganwadi_centre_id', '=', 1],
           ])
-          ->whereIn('target_id', [1,2])
+          ->whereIn('target_id', [1])
           ->get();
         return view('pregnancydelivery.index',['members' => $members]);
     }
@@ -29,10 +32,9 @@ class PregnancyDeliveryRecordController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(int $member_id)
     {
         $member = Member::find($member_id);
-
         return view('pregnancydelivery.create',['member' => $member]);
     }
 
@@ -45,30 +47,42 @@ class PregnancyDeliveryRecordController extends Controller
     public function store(Request $request)
     {
       $request->validate([
-        'vaccination_id' => 'required',
-        'due_date' => 'date_format:d/m/Y|before:tomorrow',
-        'admin_date' => 'date_format:d/m/Y|before:tomorrow',
+        'pregnancy_order' => 'required|numeric',
+        'anganwanwadi_registration_date' => 'date_format:d/m/Y|before:tomorrow',
+        'lmp_date' => 'date_format:d/m/Y|before:tomorrow',
+        'edd_date' => 'date_format:d/m/Y',
+        //'delivery_date' => 'date_format:d/m/Y|before:tomorrow',
+        //'anganwadi_reported_date' => 'date_format:d/m/Y|before:tomorrow',
       ]);
 
-      $vaccinations = Vaccination::all();
-
       $member =  Member::find($request->member_id);
-      $immunization = new ImmunizationRecord;
-      $immunization->family_id = $member->family_id;
-      $immunization->member_id = $member->id;
-      $immunization->target_type_id = $member->target_id;
+      $pd_record = new PregnancyDeliveryRecord;
+      $pd_record->pregnancy_order = $request->pregnancy_order;
+      $pd_record->family_id = $member->family_id;
+      $pd_record->member_id = $member->id;
+      $pd_record->target_type_id = $member->target_id;
 
-      $age = date_diff(date_create($member->dob), date_create(date("Y-m-d")))->m/12;
+      $age = date_diff(date_create($member->dob), date_create(date("Y-m-d")))->y;
 
-      $immunization->age = $age;
-      $immunization->vaccination_id = $request->vaccination_id;
-      $immunization->vaccination_due_date = date_format(date_create_from_format('d/m/Y',$request->due_date),'Y-m-d');
-      $immunization->vaccination_admin_date = date_format(date_create_from_format('d/m/Y',$request->admin_date),'Y-m-d');
-      $immunization->anganwadi_centre_id = 1;
+      $pd_record->age = $age;
+      $pd_record->anganwadi_resident = $member->anganwadi_resident;
+      $pd_record->lmp_date = date_format(date_create_from_format('d/m/Y',$request->lmp_date),'Y-m-d');
+      $pd_record->edd_date = date_format(date_create_from_format('d/m/Y',$request->edd_date),'Y-m-d');
 
-      $immunization->save();
-      Session::flash('success','Immunization Record Added Successfully with ID: '.$immunization->id);
-      return redirect()->route('immunization.create',['member' => $member->id]);
+      if(isset($request->delivery_date)){
+        $pd_record->delivery_date = date_format(date_create_from_format('d/m/Y',$request->delivery_date),'Y-m-d');
+      }
+
+      if(isset($request->anganwadi_reported_date)){
+        $pd_record->anganwadi_reported_date = date_format(date_create_from_format('d/m/Y',$request->anganwadi_reported_date),'Y-m-d');
+      }
+
+      $pd_record->anganwadi_registration_date = date_format(date_create_from_format('d/m/Y',$request->anganwadi_registration_date),'Y-m-d');
+      $pd_record->anganwadi_centre_id = 1;
+
+      $pd_record->save();
+      Session::flash('success','Pregnancy Delivery Record Added Successfully with ID: '.$pd_record->id);
+      return redirect()->route('pregnancydelivery.show',['member' => $member->id]);
     }
 
     /**
@@ -82,11 +96,10 @@ class PregnancyDeliveryRecordController extends Controller
         $member = Member::find($member_id);
         $pd_records = PregnancyDeliveryRecord::where([
           ['member_id', '=', $member_id],
+          ['anganwadi_centre_id', '=', 1],
         ])->get();
-        $medical_records = PregnancyMedicalProcedures::where([
-          ['member_id', '=', $member_id],
-        ])->get();
-        return view('pregnancydelivery.show',['member' => $member, 'medical_records' => $medical_records]);
+
+        return view('pregnancydelivery.show',['member' => $member, 'pd_records' => $pd_records]);
     }
 
     /**
@@ -118,8 +131,36 @@ class PregnancyDeliveryRecordController extends Controller
      * @param  \App\PregnancyDeliveryRecord  $pregnancyDeliveryRecord
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PregnancyDeliveryRecord $pregnancyDeliveryRecord)
+    public function destroy(int $pd_record_id)
     {
-        //
+        //dd($pregnancyDeliveryRecord);
+        $pregnancyDeliveryRecord = PregnancyDeliveryRecord::find($pd_record_id);
+        $pregnancyDeliveryRecord->delete();
+        Session::flash('success','Pregnancy Delivery Record Deleted Successfully with ID: '.$pregnancyDeliveryRecord->id);
+        return redirect()->route('pregnancydelivery.show',['member' => $pregnancyDeliveryRecord->member_id]);
+    }
+
+    public function showMedicalProcedure(int $pd_record_id)
+    {
+        $pd_record = PregnancyDeliveryRecord::find($pd_record_id);
+        $member = Member::find($pd_record->member_id);
+        $procedures = MedicalProcedure::all();
+        return view('pregnancydelivery.show_medical_procedure',['member' => $member, 'pd_record' => $pd_record, 'procedures' => $procedures]);
+    }
+
+    public function showAnteNatalCheckup(int $pd_record_id)
+    {
+        $pd_record = PregnancyDeliveryRecord::find($pd_record_id);
+        $member = Member::find($pd_record->member_id);
+
+        return view('pregnancydelivery.show_antenatal_checkup',['member' => $member, 'pd_record' => $pd_record]);
+    }
+
+    public function showNewBorn(int $pd_record_id)
+    {
+        $pd_record = PregnancyDeliveryRecord::find($pd_record_id);
+        $member = Member::find($pd_record->member_id);
+
+        return view('pregnancydelivery.show_new_born',['member' => $member, 'pd_record' => $pd_record]);
     }
 }

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\PregnancyMedicalProcedure;
 use Illuminate\Http\Request;
+use App\Member;
+use App\PregnancyDeliveryRecord;
+use Session;
 
 class PregnancyMedicalProcedureController extends Controller
 {
@@ -35,7 +38,31 @@ class PregnancyMedicalProcedureController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+        'procedure_date' => 'date_format:d/m/Y|before:tomorrow',
+        'remarks' => 'required|string',
+      ]);
+
+      $pd_record = PregnancyDeliveryRecord::find($request->pregnancy_id);
+      $medical = new PregnancyMedicalProcedure;
+
+      $medical->family_id = $pd_record->family_id;
+      $medical->member_id = $pd_record->member_id;
+      $medical->target_type_id = $pd_record->target_type_id;
+
+      //$age = date_diff(date_create($member->dob), date_create(date("Y-m-d")))->y;
+
+      $medical->age = $pd_record->age;
+      $medical->anganwadi_resident = $pd_record->anganwadi_resident;
+      $medical->pregnancy_id = $request->pregnancy_id;
+      $medical->procedure_id = $request->procedure_id;
+      $medical->procedure_date = date_format(date_create_from_format('d/m/Y',$request->procedure_date),'Y-m-d');
+      $medical->remarks = $request->remarks;
+      $medical->anganwadi_centre_id = 1;
+
+      $medical->save();
+      Session::flash('success','Pregnancy Medical Procedure Added Successfully with ID: '.$medical->id);
+      return redirect()->route('pregnancydelivery.medicalprocedure',['id' => $pd_record->id]);
     }
 
     /**

@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="{{asset('mobirise/images/icds-logo-transparent1-689x661.png')}}" type="image/x-icon">
   <meta name="description" content="">
-  <title>Home</title>
+  <title>eIcds | Home</title>
 
   <link rel="stylesheet" href="{{asset('mobirise/web/assets/mobirise-icons-bold/mobirise-icons-bold.css')}}">
   <link rel="stylesheet" href="{{asset('mobirise/web/assets/mobirise-icons/mobirise-icons.css')}}">

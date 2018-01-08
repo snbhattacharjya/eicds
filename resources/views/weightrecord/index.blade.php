@@ -5,10 +5,10 @@
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <div class="page-header">
-        <h1>Register No. 5 - Pregnancy and Delivery Records  <small></small></h1>
+        <h1>Register No. 10 - Children Weight Records  <small></small></h1>
       </div>
       <div class="panel panel-default">
-          <div class="panel-heading">List of Pregnant Mothers </div>
+          <div class="panel-heading">List of Children </div>
           <div class="panel-body">
             <table class="table table-bordered">
               <thead>
@@ -46,7 +46,7 @@
                       @endif
                     </td>
                     <td>
-                        <a href="{{route('pregnancydelivery.show',['member' => $member->id])}}" class="btn btn-warning btn-sm">Select</a>
+                        <a href="{{route('weightrecord.show',['member' => $member->id])}}" class="btn btn-warning btn-sm">Select</a>
                     </td>
                   </tr>
                 @endforeach

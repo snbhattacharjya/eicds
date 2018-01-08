@@ -16,13 +16,17 @@ class CreateNewBornDetailsTable extends Migration
         Schema::create('new_born_details', function (Blueprint $table) {
             $table->integer('family_id');
             $table->integer('mother_id');
+            $table->integer('pregnancy_id');
             $table->integer('child_id');
-            $table->string('mode_of_delivery');
-            $table->string('delivery_location_type');
+            $table->enum('mode_of_delivery',['Normal','Caesarean']);
+            $table->enum('delivery_location_type',['Instituion','Home']);
             $table->string('delivery_location_name');
             $table->string('village_town_name');
-            $table->string('birth_status',5);
-            $table->string('gender',1);
+            $table->string('doctor_name');
+            $table->string('pediatrician_name');
+            $table->enum('birth_status',['Live','Dead']);
+            $table->dateTime('birth_date_time');
+            $table->enum('gender',['M','F']);
             $table->float('first_weight');
             $table->date('first_weight_date');
             $table->timestamps();

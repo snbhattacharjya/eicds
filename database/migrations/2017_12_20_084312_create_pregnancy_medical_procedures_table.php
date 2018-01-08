@@ -21,6 +21,7 @@ class CreatePregnancyMedicalProceduresTable extends Migration
             $table->tinyInteger('age');
             $table->integer('anganwadi_centre_id');
             $table->enum('anganwadi_resident',['Y','N']);
+            $table->integer('procedure_id');
             $table->date('procedure_date');
             $table->string('remarks');
             $table->timestamps();

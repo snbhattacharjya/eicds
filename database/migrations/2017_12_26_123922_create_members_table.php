@@ -17,7 +17,7 @@ class CreateMembersTable extends Migration
           $table->increments('id');
           $table->integer('family_id');
           $table->string('name');
-          $table->string('aadhaar',12);
+          $table->string('aadhaar',12)->nullable();
           $table->string('relation',50);
           $table->enum('gender',['M','F']);
           $table->enum('marital_status',['Married','Unmarried']);
@@ -29,7 +29,7 @@ class CreateMembersTable extends Migration
           $table->boolean('active_status')->default(1);
           $table->date('date_of_death')->nullable();
           $table->string('cause_of_death')->nullable();
-          $table->string('mobile',10);
+          $table->string('mobile',10)->nullable();
           $table->string('bank_ifsc',50)->nullable();
           $table->string('bank_name',50)->nullable();
           $table->string('bank_account_no',50)->nullable();

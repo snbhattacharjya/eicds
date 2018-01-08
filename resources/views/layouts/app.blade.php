@@ -7,7 +7,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel='shortcut icon' type='image/x-icon' href='{{asset('/favicon.ico')}}' />
+    <link rel='shortcut icon' type='image/x-icon' href='{{asset('mobirise/images/icds-logo-transparent1-689x661.png')}}' />
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
@@ -16,7 +16,7 @@
     </head>
 <body>
     <div id="app">
-      <nav class="navbar navbar-default navbar-static-top">
+      <nav class="navbar navbar-inverse navbar-static-top">
         <div class="container">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
@@ -26,6 +26,10 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
+
+            <a class="navbar-brand" href="{{url('/start')}}">
+              <img alt="{{config('app.name')}}" src="{{asset('mobirise/images/icds-logo-transparent1-689x661.png')}}" height="25" width="25">
+            </a>
             <a class="navbar-brand" href="{{url('/start')}}">{{config('app.name')}}</a>
           </div>
 

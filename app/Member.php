@@ -17,4 +17,12 @@ class Member extends Model
     public function disability(){
       return $this->belongsTo('App\DisabilityType');
     }
+
+    public function pregnancyDeliveryRecords(){
+      return $this->hasMany('App\PregnancyDeliveryRecord','member_id');
+    }
+
+    public function newBorn(){
+      return $this->hasOne('App\NewBornDetail','child_id');
+    }
 }

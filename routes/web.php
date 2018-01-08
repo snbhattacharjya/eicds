@@ -11,18 +11,18 @@
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+// Route::get('/start', function () {
+//     return view('start');
+// });
 Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/start', function () {
-    return view('start');
-});
-Route::get('/myindex', function () {
     return view('myindex');
 });
-Route::get('/admin', function () {
-    return view('adminlte');
-});
+// Route::get('/admin', function () {
+//     return view('adminlte');
+// });
 
 Auth::routes();
 
@@ -87,3 +87,23 @@ Route::get('/pregnancydelivery', 'PregnancyDeliveryRecordController@index')->nam
 Route::get('/pregnancydelivery/{member}/show', 'PregnancyDeliveryRecordController@show')->name('pregnancydelivery.show');
 Route::get('/pregnancydelivery/{member}/create', 'PregnancyDeliveryRecordController@create')->name('pregnancydelivery.create');
 Route::post('/pregnancydelivery', 'PregnancyDeliveryRecordController@store')->name('pregnancydelivery.store');
+Route::delete('/pregnancydelivery/{id}/delete', 'PregnancyDeliveryRecordController@destroy')->name('pregnancydelivery.destroy');
+
+//Pregnancy Medical Procedure
+Route::get('/pregnancydelivery/{id}/medicalprocedure', 'PregnancyDeliveryRecordController@showMedicalProcedure')->name('pregnancydelivery.medicalprocedure');
+Route::post('/pregnancymedicalprocedure','PregnancyMedicalProcedureController@store')->name('pregnancymedicalprocedure.store');
+
+//Antenatal Checkup
+Route::get('/pregnancydelivery/{id}/antenatalcheckup', 'PregnancyDeliveryRecordController@showAnteNatalCheckup')->name('pregnancydelivery.antenatalcheckup');
+Route::post('/pregnancyantenatalcheckup','PregnancyAntenatalCheckupController@store')->name('pregnancyantenatalcheckup.store');
+
+//New Born Detail
+Route::get('/pregnancydelivery/{id}/newborn', 'PregnancyDeliveryRecordController@showNewBorn')->name('pregnancydelivery.newborn');
+Route::post('/newborn','NewBornDetailController@store')->name('newborn.store');
+
+//Weight Records
+Route::get('/weightrecord', 'WeightRecordController@index')->name('weightrecord.index');
+Route::get('/weightrecord/{id}/show', 'WeightRecordController@show')->name('weightrecord.show');
+Route::get('/weightrecord/{id}/create', 'WeightRecordController@create')->name('weightrecord.create');
+Route::post('/weightrecord','WeightRecordController@store')->name('weightrecord.store');
+Route::delete('/weightrecord/{id}/destroy','WeightRecordController@destroy')->name('weightrecord.destroy');

@@ -18,11 +18,13 @@ class CreateWeightRecordsTable extends Migration
             $table->integer('family_id');
             $table->integer('member_id');
             $table->smallInteger('target_type_id');
-            $table->tinyInteger('age');
+            $table->float('age');
             $table->integer('anganwadi_centre_id');
-            $table->date('reporting_date');
-            $table->tinyInteger('weight');
-            $table->string('weight_status',50);
+            $table->enum('anganwadi_resident',['Y','N']);
+            $table->float('weight',4,2);
+            $table->decimal('weight_change',4,2);
+            $table->enum('weight_status',['Normal','Moderately Underweight','Severely Underweight']);
+            $table->date('reported_date');
             $table->timestamps();
         });
     }
