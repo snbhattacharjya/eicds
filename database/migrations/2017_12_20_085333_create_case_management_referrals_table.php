@@ -20,6 +20,7 @@ class CreateCaseManagementReferralsTable extends Migration
             $table->smallInteger('target_type_id');
             $table->tinyInteger('age');
             $table->integer('anganwadi_centre_id');
+            $table->enum('anganwadi_resident',['Y','N']);
             $table->date('first_symptom_date');
             $table->string('problem_desc');
             $table->integer('referred_centre_type_id');

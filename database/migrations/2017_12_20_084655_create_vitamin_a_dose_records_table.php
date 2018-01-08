@@ -20,6 +20,7 @@ class CreateVitaminADoseRecordsTable extends Migration
             $table->smallInteger('target_type_id');
             $table->tinyInteger('age');
             $table->integer('anganwadi_centre_id');
+            $table->enum('anganwadi_resident',['Y','N']);
             $table->integer('dose_id');
             $table->date('dose_due_date');
             $table->date('dose_admin_date');

@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
+                <div class="panel-heading">Register District Project Officer for ICDS</div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
@@ -20,6 +20,57 @@
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('aadhaar') ? ' has-error' : '' }}">
+                            <label for="aadhaar" class="col-md-4 control-label">Aadhaar No</label>
+
+                            <div class="col-md-6">
+                                <input id="aadhaar" type="text" class="form-control" name="aadhaar" value="{{ old('aadhaar') }}" required>
+
+                                @if ($errors->has('aadhaar'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('aadhaar') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('state') ? ' has-error' : '' }}">
+                            <label for="state" class="col-md-4 control-label">State</label>
+
+                            <div class="col-md-6">
+                                <select id="state" class="form-control" name="state" required>
+                                  <option value="">--Select--</option>
+                                  @foreach ($states as $state)
+                                    <option value="{{$state->id}}">{{$state->state_name}}</option>
+                                  @endforeach
+                                </select>
+
+                                @if ($errors->has('state'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('state') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('district') ? ' has-error' : '' }}">
+                            <label for="district" class="col-md-4 control-label">District</label>
+
+                            <div class="col-md-6">
+                              <select id="district" class="form-control" name="district" required>
+                                <option value="">--Select--</option>
+                                @foreach ($districts as $district)
+                                  <option value="{{$district->id}}">{{$district->district_name}}</option>
+                                @endforeach
+                              </select>
+                                @if ($errors->has('district'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('district') }}</strong>
                                     </span>
                                 @endif
                             </div>

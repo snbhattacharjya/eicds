@@ -20,9 +20,9 @@ class CreateSupplementaryFoodDistributionsTable extends Migration
             $table->smallInteger('target_type_id');
             $table->float('age');
             $table->integer('anganwadi_centre_id');
-            $table->boolean('anganwadi_resident');
+            $table->enum('anganwadi_resident',['Y','N']);
             $table->date('ration_given_date');
-            $table->string('ration_given_quantity',1);
+            $table->enum('ration_given_quantity',['N','L']);
 
             $table->timestamps();
         });

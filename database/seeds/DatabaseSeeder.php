@@ -11,6 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(StateSeeder::class);
+        $this->call(WBDistrictSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(TargetTypeSeeder::class);
         $this->call(DisabilityTypeSeeder::class);
