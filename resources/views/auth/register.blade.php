@@ -63,7 +63,7 @@
 
                             <div class="col-md-6">
                               <select id="district" class="form-control" name="district" required>
-                                <option value="">--Select--</option>
+                                <option value="11">Hooghly</option>
                                 @foreach ($districts as $district)
                                   <option value="{{$district->id}}">{{$district->district_name}}</option>
                                 @endforeach
