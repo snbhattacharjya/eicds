@@ -161,26 +161,32 @@
               <div class="media-container-column col-lg-8" data-form-type="formoid">
                       <div data-form-alert="" hidden="">Thanks for filling out the form!</div>
 
-                      <form class="mbr-form" action="https://mobirise.com/" method="post" data-form-title="Mobirise Form"><input type="hidden" data-form-email="true" value="oWHL3gyurR3I1tKfEXLNkNbgA10i5yzXMhO4hA7n/bkoZQ3lEXtIdnO8I9+QuwAXez1lih4METwVxj/DxrbBOgR2gKTKudUeoiubdrK+wxhHalVQAaWGdszXmg1Jkb41">
+                      <form class="mbr-form" action="#" method="post" data-form-title="Mobirise Form"><input type="hidden" data-form-email="true" value="oWHL3gyurR3I1tKfEXLNkNbgA10i5yzXMhO4hA7n/bkoZQ3lEXtIdnO8I9+QuwAXez1lih4METwVxj/DxrbBOgR2gKTKudUeoiubdrK+wxhHalVQAaWGdszXmg1Jkb41">
                           <div class="row row-sm-offset">
-                              <div class="col-md-4 multi-horizontal" data-for="name">
+                              <div class="col-md-12 multi-horizontal" data-for="aadhaar">
                                   <div class="form-group">
-                                      <label class="form-control-label mbr-fonts-style display-7" for="name-form1-y">Name</label>
-                                      <input type="text" class="form-control" name="name" data-form-field="Name" required="" id="name-form1-y">
+                                      <label class="form-control-label mbr-fonts-style display-7" for="name-form1-y">Aadhaar</label>
+                                      <input type="text" class="form-control" name="aadhaar" data-form-field="aadhaar" required="" id="name-form1-y">
                                   </div>
                               </div>
-                              <div class="col-md-4 multi-horizontal" data-for="email">
+                              <!--<div class="col-md-3 multi-horizontal" data-for="email">
                                   <div class="form-group">
                                       <label class="form-control-label mbr-fonts-style display-7" for="email-form1-y">Email</label>
                                       <input type="email" class="form-control" name="email" data-form-field="Email" required="" id="email-form1-y">
                                   </div>
                               </div>
-                              <div class="col-md-4 multi-horizontal" data-for="phone">
+                              <div class="col-md-3 multi-horizontal" data-for="phone">
                                   <div class="form-group">
                                       <label class="form-control-label mbr-fonts-style display-7" for="phone-form1-y">Phone</label>
                                       <input type="tel" class="form-control" name="phone" data-form-field="Phone" id="phone-form1-y">
                                   </div>
                               </div>
+                              <div class="col-md-3 multi-horizontal" data-for="phone">
+                                  <div class="form-group">
+                                      <label class="form-control-label mbr-fonts-style display-7" for="phone-form1-y">Phone</label>
+                                      <input type="tel" class="form-control" name="phone" data-form-field="Phone" id="phone-form1-y">
+                                  </div>
+                              </div>-->
                           </div>
 
 

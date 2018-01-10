@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('aadhaar',12)->unique();
+            $table->enum('type',['Central','State','District','Project','Sector','Center'])->default('District');
             $table->string('email',100)->unique();
             $table->string('password');
             $table->rememberToken();
