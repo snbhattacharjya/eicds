@@ -17,7 +17,7 @@ class CreateAnganwadiCentresTable extends Migration
             $table->increments('id');
             $table->integer('sector_id');
             $table->string('centre_code',50)->unique();
-            $table->string('centre_name',50)->unique();
+            $table->string('centre_name',50);
             $table->timestamps();
         });
     }

@@ -17,7 +17,7 @@ class CreateSectorsTable extends Migration
             $table->increments('id');
             $table->integer('project_id');
             $table->string('sector_code',50)->unique();
-            $table->string('sector_name',50)->unique();
+            $table->string('sector_name',50);
             $table->timestamps();
         });
     }

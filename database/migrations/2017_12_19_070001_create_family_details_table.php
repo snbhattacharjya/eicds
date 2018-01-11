@@ -22,7 +22,7 @@ class CreateFamilyDetailsTable extends Migration
             $table->string('address');
             $table->string('village_town_name');
             $table->string('pincode',6);
-
+            $table->integer('anganwadi_centre_id');
             $table->timestamps();
         });
     }
