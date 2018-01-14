@@ -14,8 +14,12 @@ class CreateAreaUserTable extends Migration
     public function up()
     {
         Schema::create('area_user', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('user_id');
+            $table->integer('area_id');
             $table->timestamps();
+        });
+        Schema::table('area_user', function (Blueprint $table) {
+            $table->primary(['user_id','area_id']);
         });
     }
 
