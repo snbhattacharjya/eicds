@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{asset('css/font-awesome.css')}}" rel="stylesheet" type="text/css">
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     </head>
 <body>
     <div id="app">

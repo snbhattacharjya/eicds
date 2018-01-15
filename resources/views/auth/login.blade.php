@@ -50,6 +50,12 @@
                         </div>
 
                         <div class="form-group">
+                          <div class="col-md-6 col-md-offset-4">
+                            <div class="g-recaptcha" data-sitekey="6LdiukAUAAAAAPYwpNR9zazL_Pyufj9VwPmua-q6"></div>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     Login
