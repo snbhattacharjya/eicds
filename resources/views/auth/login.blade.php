@@ -49,9 +49,14 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
                           <div class="col-md-6 col-md-offset-4">
                             <div class="g-recaptcha" data-sitekey="6LdiukAUAAAAAPYwpNR9zazL_Pyufj9VwPmua-q6"></div>
+                            @if ($errors->has('g-recaptcha-response'))
+                                <span class="help-block">
+                                    <strong>Captcha Field Required. </strong>
+                                </span>
+                            @endif
                           </div>
                         </div>
 

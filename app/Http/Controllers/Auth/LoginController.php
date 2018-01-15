@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -40,5 +41,17 @@ class LoginController extends Controller
     public function username()
     {
         return 'aadhaar';
+    }
+
+    protected function validateLogin(Request $request)
+    {
+        $this->validate($request, [
+            $this->username() => 'required|digits:12',
+            'password' => 'required|string',
+            'g-recaptcha-response' => 'required',
+        ]);
+
+        $token = $request->input('g-recaptcha-response');
+        
     }
 }
