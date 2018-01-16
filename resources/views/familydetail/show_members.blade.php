@@ -51,7 +51,7 @@
                             <li><a href="#">Migration</a></li>
                             <li><a href="#">Mark as HOF</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">Change Status</a></li>
                           </ul>
                         </div>
                       </td>
@@ -60,6 +60,34 @@
                 </tbody>
               </table>
             </div>
+        </div>
+        <div class="panel panel-danger">
+          <div class="panel-heading">Import New Member </div>
+          <div class="panel-body">
+            <form class="form-horizontal" method="POST" action="{{ route('member.showImport') }}">
+                {{ csrf_field() }}
+
+                <div class="form-group{{ $errors->has('aadhaar') ? ' has-error' : '' }}">
+                    <label for="aadhaar" class="col-md-4 control-label">Aadhaar of Member</label>
+
+                    <div class="col-md-6">
+                        <input type="hidden" value="{{$family_id}}" id="family_id" name="family_id">
+                        <input id="aadhaar" type="text" class="form-control" name="aadhaar" value="{{ old('aadhaar') }}" required autofocus>
+
+                        @if ($errors->has('aadhaar'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('aadhaar') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <div class="col-md-2">
+                      <button type="submit" class="btn btn-primary">
+                          Search
+                      </button>
+                    </div>
+                </div>
+              </form>
+          </div>
         </div>
       </div>
 

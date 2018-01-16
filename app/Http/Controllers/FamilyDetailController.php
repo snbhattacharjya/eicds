@@ -10,6 +10,7 @@ use App\Member;
 use App\FamilyMigration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Session;
 
 class FamilyDetailController extends Controller
@@ -21,7 +22,9 @@ class FamilyDetailController extends Controller
      */
     public function index()
     {
-        $families = FamilyDetail::all();
+        $families = FamilyDetail::where([
+          ['anganwadi_centre_id', '=', Auth::user()->area->area_id],
+        ])->get();
         return view('familydetail.index',['families' => $families]);
     }
 
@@ -76,7 +79,7 @@ class FamilyDetailController extends Controller
           $family->address = $request->address;
           $family->village_town_name = $request->village_town_name;
           $family->pincode = $request->pincode;
-
+          $family->anganwadi_centre_id = Auth::user()->area->area_id;
           $family->save();
 
           //Member create
@@ -92,7 +95,7 @@ class FamilyDetailController extends Controller
           $member->anganwadi_resident = $request->anganwadi_resident;
           $member->mobile = $request->mobile;
           $member->relation = 'Self';
-          $member->anganwadi_centre_id = 1;
+          $member->anganwadi_centre_id = Auth::user()->area->area_id;
           $member->active_status = 1;
 
           $member->save();
@@ -102,7 +105,7 @@ class FamilyDetailController extends Controller
           $migration->family_id = $family->id;
           $migration->member_id = $member->id;
           $migration->target_id = $request->target_id;
-          $migration->anganwadi_centre_id = 1;
+          $migration->anganwadi_centre_id = Auth::user()->area->area_id;
           $migration->anganwadi_resident = $request->anganwadi_resident;
           $migration->type = 'IN';
           $migration->remarks = 'New Family';
@@ -165,5 +168,65 @@ class FamilyDetailController extends Controller
         $targets = TargetType::all();
         $members = Member::where('family_id',$family_id)->get();
         return view('familydetail.show_members',['members' => $members, 'disabilities' => $disabilities, 'targets' => $targets, 'family_id' => $family_id]);
+    }
+
+    public function search()
+    {
+        return view('familydetail.search');
+    }
+
+    public function showImport(Request $request)
+    {
+      $request->validate([
+        'aadhaar_hof' => 'required|digits:12',
+      ]);
+      $member = Member::where([
+        ['aadhaar', '=', $request->aadhaar_hof],
+        ['relation', '=', 'Self'],
+        ['anganwadi_centre_id', '<>', Auth::user()->area->area_id],
+        ])->first();
+      return view('familydetail.search',['member' => $member]);
+    }
+
+    public function import(Request $request)
+    {
+      $request->validate([
+        'remarks' => 'required|string|max:255',
+      ]);
+      $members = Member::where([
+        ['family_id', '=', $request->family_id],
+        ['anganwadi_centre_id', '<>', Auth::user()->area->area_id],
+        ])->get();
+      foreach ($members as $member) {
+        $migration = new FamilyMigration;
+        $migration->family_id = $member->family_id;
+        $migration->member_id = $member->id;
+        $migration->target_id = $member->target_id;
+        $migration->anganwadi_centre_id = $member->anganwadi_centre_id;
+        $migration->anganwadi_resident = $member->anganwadi_resident;
+        $migration->type = 'OUT';
+        $migration->remarks = $request->remarks;
+        $migration->save();
+
+        $member->anganwadi_centre_id = Auth::user()->area->area_id;
+        $member->anganwadi_resident = 'N';
+        $member->save();
+
+        $migration = new FamilyMigration;
+        $migration->family_id = $member->family_id;
+        $migration->member_id = $member->id;
+        $migration->target_id = $member->target_id;
+        $migration->anganwadi_centre_id = $member->anganwadi_centre_id;
+        $migration->anganwadi_resident = $member->anganwadi_resident;
+        $migration->type = 'IN';
+        $migration->remarks = 'New Family';
+        $migration->save();
+      }
+      $family = FamilyDetail::find($request->family_id);
+      $family->anganwadi_centre_id = Auth::user()->area->area_id;
+      $family->save();
+
+      Session::flash('success','Family Imported Successfully with ID: '.$family->id);
+      return redirect('/familydetail');
     }
 }

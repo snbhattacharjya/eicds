@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Member;
 use App\SupplementaryFoodType;
 use Session;
+use Illuminate\Support\Facades\Auth;
 
 class SupplementaryFoodDistributionController extends Controller
 {
@@ -20,7 +21,7 @@ class SupplementaryFoodDistributionController extends Controller
         $members = Member::where([
             ['active_status', '=', 1],
             ['target_id', '<>', 5],
-            ['anganwadi_centre_id', '=', 1],
+            ['anganwadi_centre_id', '=', Auth::user()->area->area_id],
           ])->get();
         return view('fooddistribution.index',['members' => $members]);
     }
@@ -62,7 +63,7 @@ class SupplementaryFoodDistributionController extends Controller
         $distribution->age = $age;
         $distribution->ration_given_quantity = $request->ration_given_quantity;
         $distribution->ration_given_date = date_format(date_create_from_format('d/m/Y',$request->ration_given_date),'Y-m-d');
-        $distribution->anganwadi_centre_id = 1;
+        $distribution->anganwadi_centre_id = Auth::user()->area->area_id;
 
         $distribution->save();
         $distribution->saveFoodType($request->food_type);

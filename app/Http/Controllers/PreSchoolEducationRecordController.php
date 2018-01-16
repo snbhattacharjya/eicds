@@ -8,6 +8,7 @@ use Session;
 use App\Member;
 use App\PreSchoolActivity;
 use App\ActivityPreSchool;
+use Illuminate\Support\Facades\Auth;
 
 class PreSchoolEducationRecordController extends Controller
 {
@@ -21,7 +22,7 @@ class PreSchoolEducationRecordController extends Controller
         $members = Member::where([
             ['active_status', '=', 1],
             ['target_id', '=', 3],
-            ['anganwadi_centre_id', '=', 1],
+            ['anganwadi_centre_id', '=', Auth::user()->area->area_id],
           ])->get();
         return view('preschooleducation.index',['members' => $members]);
     }
@@ -62,7 +63,7 @@ class PreSchoolEducationRecordController extends Controller
 
         $preschool->age = $age;
         $preschool->attendance_date = date_format(date_create_from_format('d/m/Y',$request->attendance_date),'Y-m-d');
-        $preschool->anganwadi_centre_id = 1;
+        $preschool->anganwadi_centre_id = Auth::user()->area->area_id;
 
         $preschool->save();
         Session::flash('success','Preschool Education Record Added Successfully with ID: '.$preschool->id);

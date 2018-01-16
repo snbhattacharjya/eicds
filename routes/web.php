@@ -48,11 +48,20 @@ Route::middleware('auth')->group(function(){
   //Family Register
   Route::get('/familydetail', 'FamilyDetailController@index')->name('familydetail.index');
   Route::get('/familydetail/create', 'FamilyDetailController@create')->name('familydetail.create');
+  Route::get('/familydetail/search', 'FamilyDetailController@search')->name('familydetail.search');
   Route::post('/familydetail', 'FamilyDetailController@store')->name('familydetail.store');
   Route::get('/familydetail/{familydetail}/members', 'FamilyDetailController@showMembers')->name('familydetail.showMembers');
 
   //Member
   Route::post('/member', 'MemberController@store')->name('member.store');
+
+  //Family Migration
+  Route::post('/familydetail/search', 'FamilyDetailController@showImport')->name('familydetail.showImport');
+  Route::post('/familydetail/migration', 'FamilyDetailController@import')->name('familydetail.import');
+
+  //Member Migration
+  Route::post('/member/search', 'MemberController@showImport')->name('member.showImport');
+  Route::post('/member/migration', 'MemberController@import')->name('member.import');
 
   //Food Distribution
   Route::get('/fooddistribution', 'SupplementaryFoodDistributionController@index')->name('fooddistribution.index');
@@ -61,7 +70,7 @@ Route::middleware('auth')->group(function(){
 
   //PreSchoolEducationRecord
   Route::get('/preschooleducation', 'PreSchoolEducationRecordController@index')->name('preschooleducation.index');
-  Route::get('/PreSchoolEducationRecordController/{member}/create', 'PreSchoolEducationRecordController@create')->name('preschooleducation.create');
+  Route::get('/preschooleducation/{member}/create', 'PreSchoolEducationRecordController@create')->name('preschooleducation.create');
   Route::post('/preschooleducation', 'PreSchoolEducationRecordController@store')->name('preschooleducation.store');
 
   //Preschool activity

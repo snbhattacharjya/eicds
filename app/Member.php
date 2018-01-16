@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Member extends Model
 {
     public function family(){
-      return $this->belongsTo('App\FamilyDetail');
+      return $this->belongsTo('App\FamilyDetail','family_id','id');
     }
 
     public function target(){

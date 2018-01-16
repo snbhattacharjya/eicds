@@ -31,7 +31,7 @@
             <a class="navbar-brand" href="{{url('/')}}">
               <img alt="{{config('app.name')}}" src="{{asset('mobirise/images/icds-logo-transparent1-689x661.png')}}" height="25" width="25">
             </a>
-            <a class="navbar-brand" href="{{url('/start')}}">{{config('app.name')}}</a>
+            <a class="navbar-brand" href="{{url('/')}}">{{config('app.name')}}</a>
           </div>
 
           @if (Auth::check())
@@ -49,7 +49,7 @@
               @else
                   <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                          {{ Auth::user()->name }} <span class="caret"></span>
+                          {{ Auth::user()->name }} ({{Auth::user()->type}})<span class="caret"></span>
                       </a>
 
                       <ul class="dropdown-menu">

@@ -15,7 +15,7 @@
                         </div>
                     @endif
 
-                    {!! $chart->html() !!}
+                    {!! $charts['population_chart']->html() !!}
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
                         </div>
                     @endif
 
-                    {!! $pie_chart->html() !!}
+                    {!! $charts['category_chart']->html() !!}
                 </div>
             </div>
         </div>
@@ -48,15 +48,15 @@
                         </div>
                     @endif
 
-                    {!! $donut_chart->html() !!}
+                    {!! $charts['gender_chart']->html() !!}
                 </div>
             </div>
         </div>
     </div>
 </div>
 {!! Charts::scripts() !!}
-{!! $chart->script() !!}
-{!! $pie_chart->script() !!}
-{!! $donut_chart->script() !!}
+{!! $charts['population_chart']->script() !!}
+{!! $charts['category_chart']->script() !!}
+{!! $charts['gender_chart']->script() !!}
 
 @endsection

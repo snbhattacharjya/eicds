@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class FamilyDetail extends Model
 {
     public function members(){
-      return $this->hasMany('App\Member','family_id');
+      return $this->hasMany('App\Member','id','family_id');
     }
 
     public function category(){

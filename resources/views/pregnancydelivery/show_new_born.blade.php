@@ -126,7 +126,7 @@
                             <select id="mode_of_delivery" class="form-control" name="mode_of_delivery" required>
                               <option value="">--Select--</option>
                               <option value="Normal">Normal</option>
-                              <option value="Caeserean">Caeserean</option>
+                              <option value="Caesarean">Caesarean</option>
                             </select>
                             @if ($errors->has('mode_of_delivery'))
                                 <span class="help-block">
@@ -253,7 +253,7 @@
                     </div>
 
                     <div class="form-group{{ $errors->has('first_weight') ? ' has-error' : '' }}">
-                        <label for="first_weight" class="col-md-4 control-label">First Weight</label>
+                        <label for="first_weight" class="col-md-4 control-label">First Weight (Kg)</label>
 
                         <div class="col-md-6">
                             <input type="text" id="first_weight" class="form-control" name="first_weight" value="{{old('first_weight')}}" required>

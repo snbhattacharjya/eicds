@@ -14,13 +14,14 @@ class CreateActivityPreSchoolsTable extends Migration
     public function up()
     {
         Schema::create('activity_pre_schools', function (Blueprint $table) {
+            $table->integer('anganwadi_centre_id');
             $table->integer('activity_id');
             $table->date('preschool_date');
             $table->timestamps();
         });
 
         Schema::table('activity_pre_schools', function (Blueprint $table) {
-            $table->primary(['activity_id','preschool_date']);
+            $table->primary(['anganwadi_centre_id','activity_id','preschool_date']);
         });
     }
 

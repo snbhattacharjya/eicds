@@ -12,7 +12,7 @@
         <p>
           <table class="table table-bordered">
             <thead>
-              <tr>
+              <tr class="bg-info">
                 <th>#</th>
                 <th>FamilyID</th>
                 <th>HOF Name</th>
@@ -31,9 +31,8 @@
                   <td>{{$family->category->category_name}}</td>
                   <td>{{$family->address}}</td>
                   <td>{{$family->village_town_name}}</td>
-                  <td><a href="#" class="btn btn-sm btn-warning">Edit</a>
-                    <a href="{{route('familydetail.showMembers',['family_id' => $family->id])}}" class="btn btn-sm btn-info">Members</a>
-                    <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                  <td>
+                    <a href="{{route('familydetail.showMembers',['family_id' => $family->id])}}" class="btn btn-sm btn-warning">Members</a>
                   </td>
                 </tr>
               @endforeach
@@ -42,8 +41,11 @@
         </p>
       </div>
 
-      <div class="col-md-3">
-          <a href="{{url('familydetail/create')}}" class="btn btn-lg btn-primary pull-right"name="button">Add New Family</a>
+      <div class="col-md-3 well">
+        <ul class="nav nav-pills nav-stacked">
+          <li role="presentation"><a href="{{url('familydetail/create')}}"><label class="text-danger"><i class="fa fa-plus-square"></i> New Family</label></a></li>
+          <li role="presentation"><a href="{{url('familydetail/search')}}"><label class="text-success"><i class="fa fa-external-link"></i> Import Family</label></a></li>
+        </ul>
       </div>
     </div>
 </div>

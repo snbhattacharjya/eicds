@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Member;
 use Illuminate\Http\Request;
 use Session;
+use App\FamilyMigration;
+use Illuminate\Support\Facades\Auth;
 
 class MemberController extends Controller
 {
@@ -61,7 +63,7 @@ class MemberController extends Controller
       $member->anganwadi_resident = $request->anganwadi_resident;
       $member->mobile = $request->mobile;
       $member->relation = $request->relation;
-      $member->anganwadi_centre_id = 1;
+      $member->anganwadi_centre_id = Auth::user()->area->area_id;
       $member->active_status = 1;
 
       $member->save();
@@ -113,5 +115,54 @@ class MemberController extends Controller
     public function destroy(Member $member)
     {
         //
+    }
+
+    public function showImport(Request $request){
+      $request->validate([
+        'aadhaar' => 'required|digits:12',
+      ]);
+      $member = Member::where([
+        ['aadhaar', '=', $request->aadhaar],
+        ['anganwadi_centre_id', '<>', Auth::user()->area->area_id],
+        ])->first();
+      return view('familydetail.show_member_import',['member' => $member, 'family_id' => $request->family_id]);
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+          'remarks' => 'required|string|max:255',
+        ]);
+
+        $member = Member::find($request->member_id);
+
+        $migration = new FamilyMigration;
+        $migration->family_id = $member->family_id;
+        $migration->member_id = $member->id;
+        $migration->target_id = $member->target_id;
+        $migration->anganwadi_centre_id = $member->anganwadi_centre_id;
+        $migration->anganwadi_resident = $member->anganwadi_resident;
+        $migration->type = 'OUT';
+        $migration->remarks = $request->remarks;
+        $migration->save();
+
+        $member->family_id = $request->family_id;
+        $member->anganwadi_centre_id = Auth::user()->area->area_id;
+        $member->anganwadi_resident = 'N';
+        $member->save();
+
+        $migration = new FamilyMigration;
+        $migration->family_id = $member->family_id;
+        $migration->member_id = $member->id;
+        $migration->target_id = $member->target_id;
+        $migration->anganwadi_centre_id = $member->anganwadi_centre_id;
+        $migration->anganwadi_resident = $member->anganwadi_resident;
+        $migration->type = 'IN';
+        $migration->remarks = 'Join Family';
+        $migration->save();
+
+
+        Session::flash('success','Member Imported Successfully with ID: '.$member->id);
+        return redirect()->route('familydetail.showMembers',['family_id' => $member->family_id]);
     }
 }

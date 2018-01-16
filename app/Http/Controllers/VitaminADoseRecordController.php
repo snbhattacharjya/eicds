@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Member;
 use Session;
 use App\VitaminADose;
+use Illuminate\Support\Facades\Auth;
 
 class VitaminADoseRecordController extends Controller
 {
@@ -20,7 +21,7 @@ class VitaminADoseRecordController extends Controller
       $members = Member::where([
           ['active_status', '=', 1],
           ['target_id', '=', 3],
-          ['anganwadi_centre_id', '=', 1],
+          ['anganwadi_centre_id', '=', Auth::user()->area->area_id],
         ])->get();
       return view('vitamina.index',['members' => $members]);
     }
@@ -65,7 +66,7 @@ class VitaminADoseRecordController extends Controller
       $vitamina_dose_record->dose_id = $request->dose_id;
       $vitamina_dose_record->dose_due_date = date_format(date_create_from_format('d/m/Y',$request->due_date),'Y-m-d');
       $vitamina_dose_record->dose_admin_date = date_format(date_create_from_format('d/m/Y',$request->admin_date),'Y-m-d');
-      $vitamina_dose_record->anganwadi_centre_id = 1;
+      $vitamina_dose_record->anganwadi_centre_id = Auth::user()->area->area_id;
 
       $vitamina_dose_record->save();
       Session::flash('success','Vitamin A Dose Record Added Successfully with ID: '.$vitamina_dose_record->id);

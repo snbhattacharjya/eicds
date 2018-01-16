@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Member;
 use App\Vaccination;
 use Session;
+use Illuminate\Support\Facades\Auth;
 
 class ImmunizationRecordController extends Controller
 {
@@ -20,7 +21,7 @@ class ImmunizationRecordController extends Controller
         $members = Member::where([
             ['active_status', '=', 1],
             ['target_id', '=', 3],
-            ['anganwadi_centre_id', '=', 1],
+            ['anganwadi_centre_id', '=', Auth::user()->area->area_id],
           ])->get();
         return view('immunization.index',['members' => $members]);
     }
@@ -65,7 +66,7 @@ class ImmunizationRecordController extends Controller
       $immunization->vaccination_id = $request->vaccination_id;
       $immunization->vaccination_due_date = date_format(date_create_from_format('d/m/Y',$request->due_date),'Y-m-d');
       $immunization->vaccination_admin_date = date_format(date_create_from_format('d/m/Y',$request->admin_date),'Y-m-d');
-      $immunization->anganwadi_centre_id = 1;
+      $immunization->anganwadi_centre_id = Auth::user()->area->area_id;
 
       $immunization->save();
       Session::flash('success','Immunization Record Added Successfully with ID: '.$immunization->id);

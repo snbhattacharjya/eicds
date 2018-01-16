@@ -15,6 +15,7 @@ class CreatePregnancyMedicalProceduresTable extends Migration
     {
         Schema::create('pregnancy_medical_procedures', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('pregnancy_id');
             $table->integer('family_id');
             $table->integer('member_id');
             $table->smallInteger('target_type_id');

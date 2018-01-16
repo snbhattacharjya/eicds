@@ -19,7 +19,7 @@ class CreateNewBornDetailsTable extends Migration
             $table->integer('pregnancy_id');
             $table->integer('child_id');
             $table->enum('mode_of_delivery',['Normal','Caesarean']);
-            $table->enum('delivery_location_type',['Instituion','Home']);
+            $table->enum('delivery_location_type',['Institution','Home']);
             $table->string('delivery_location_name');
             $table->string('village_town_name');
             $table->string('doctor_name');

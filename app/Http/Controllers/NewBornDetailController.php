@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\PregnancyDeliveryRecord;
 use App\Member;
 use Session;
+use Illuminate\Support\Facades\Auth;
+
 class NewBornDetailController extends Controller
 {
     /**
@@ -73,13 +75,14 @@ class NewBornDetailController extends Controller
       $new_member->family_id = $pd_record->family_id;
       $new_member->name = $request->child_name;
       $new_member->gender = $request->gender;
+      $new_member->aadhaar = mt_rand(1999,9999);//Setting a random aadhaar
       $new_member->dob = date_format(date_create_from_format('d/m/Y H:i',$request->birth_date_time),'Y-m-d');
       $new_member->marital_status = 'Unmarried';
       $new_member->target_id = 3;
       $new_member->disability_id = 6;
       $new_member->anganwadi_resident = $pd_record->anganwadi_resident;
       $new_member->relation = 'Other';
-      $new_member->anganwadi_centre_id = 1;
+      $new_member->anganwadi_centre_id = Auth::user()->area->area_id;
       if($new_born->birth_status == 'Live'){
         $new_member->active_status = 1;
       }
@@ -89,6 +92,11 @@ class NewBornDetailController extends Controller
       $new_member->save();
       $new_born->child_id = $new_member->id;
       $new_born->save();
+      //Updating Aadhaar
+      $new_member = Member::find($new_member->id);
+      $new_member->aadhaar = $new_member->id;
+      $new_member->save();
+
       Session::flash('success','New Born Added Successfully with ID: '.$new_born->child_id);
       return redirect()->route('pregnancydelivery.newborn',['id' => $pd_record->id]);
     }

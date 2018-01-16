@@ -6,6 +6,7 @@ use App\WeightRecord;
 use Illuminate\Http\Request;
 use App\Member;
 use Session;
+use Illuminate\Support\Facades\Auth;
 
 class WeightRecordController extends Controller
 {
@@ -18,7 +19,7 @@ class WeightRecordController extends Controller
     {
       $members = Member::where([
           ['active_status', '=', 1],
-          ['anganwadi_centre_id', '=', 1],
+          ['anganwadi_centre_id', '=', Auth::user()->area->area_id],
         ])
         ->whereIn('target_id', [3])
         ->get();
@@ -66,7 +67,7 @@ class WeightRecordController extends Controller
       $wt_record->anganwadi_resident = $member->anganwadi_resident;
       $wt_record->reported_date = date_format(date_create_from_format('d/m/Y',$request->reported_date),'Y-m-d');
 
-      $wt_record->anganwadi_centre_id = 1;
+      $wt_record->anganwadi_centre_id = Auth::user()->area->area_id;
 
       $wt_record->save();
       Session::flash('success','Weight Record Added Successfully with ID: '.$wt_record->id);
@@ -84,7 +85,7 @@ class WeightRecordController extends Controller
       $member = Member::find($member_id);
       $wt_records = WeightRecord::where([
         ['member_id', '=', $member_id],
-        ['anganwadi_centre_id', '=', 1],
+        //['anganwadi_centre_id', '=', 1],
       ])->get();
 
       return view('weightrecord.show',['member' => $member, 'wt_records' => $wt_records]);

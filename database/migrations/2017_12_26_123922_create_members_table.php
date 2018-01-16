@@ -17,7 +17,7 @@ class CreateMembersTable extends Migration
           $table->increments('id');
           $table->integer('family_id');
           $table->string('name');
-          $table->string('aadhaar',12)->nullable();
+          $table->string('aadhaar',12)->unique();
           $table->string('relation',50);
           $table->enum('gender',['M','F']);
           $table->enum('marital_status',['Married','Unmarried']);

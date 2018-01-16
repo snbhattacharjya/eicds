@@ -8,6 +8,7 @@ use App\Member;
 use Session;
 use App\MedicalProcedure;
 use App\PregnancyAntenatalCheckup;
+use Illuminate\Support\Facades\Auth;
 
 class PregnancyDeliveryRecordController extends Controller
 {
@@ -20,7 +21,7 @@ class PregnancyDeliveryRecordController extends Controller
     {
         $members = Member::where([
             ['active_status', '=', 1],
-            ['anganwadi_centre_id', '=', 1],
+            ['anganwadi_centre_id', '=', Auth::user()->area->area_id],
           ])
           ->whereIn('target_id', [1])
           ->get();
@@ -78,7 +79,7 @@ class PregnancyDeliveryRecordController extends Controller
       }
 
       $pd_record->anganwadi_registration_date = date_format(date_create_from_format('d/m/Y',$request->anganwadi_registration_date),'Y-m-d');
-      $pd_record->anganwadi_centre_id = 1;
+      $pd_record->anganwadi_centre_id = Auth::user()->area->area_id;
 
       $pd_record->save();
       Session::flash('success','Pregnancy Delivery Record Added Successfully with ID: '.$pd_record->id);
@@ -96,7 +97,7 @@ class PregnancyDeliveryRecordController extends Controller
         $member = Member::find($member_id);
         $pd_records = PregnancyDeliveryRecord::where([
           ['member_id', '=', $member_id],
-          ['anganwadi_centre_id', '=', 1],
+          //['anganwadi_centre_id', '=', Auth::user()->area->area_id],
         ])->get();
 
         return view('pregnancydelivery.show',['member' => $member, 'pd_records' => $pd_records]);

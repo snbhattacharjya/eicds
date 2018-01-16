@@ -6,6 +6,8 @@ use App\PregnancyAntenatalCheckup;
 use Illuminate\Http\Request;
 use App\PregnancyDeliveryRecord;
 use Session;
+use Illuminate\Support\Facades\Auth;
+
 class PregnancyAntenatalCheckupController extends Controller
 {
     /**
@@ -59,7 +61,7 @@ class PregnancyAntenatalCheckupController extends Controller
       $checkup->checkup_date = date_format(date_create_from_format('d/m/Y',$request->checkup_date),'Y-m-d');
       $checkup->doctor_name = $request->doctor_name;
       $checkup->remarks = $request->remarks;
-      $checkup->anganwadi_centre_id = 1;
+      $checkup->anganwadi_centre_id = Auth::user()->area->area_id;
 
       $checkup->save();
       Session::flash('success','Pregnancy Ante Natal Checkup Added Successfully with ID: '.$checkup->id);

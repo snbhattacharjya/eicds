@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Member;
 use App\PregnancyDeliveryRecord;
 use Session;
+use Illuminate\Support\Facades\Auth;
 
 class PregnancyMedicalProcedureController extends Controller
 {
@@ -58,7 +59,7 @@ class PregnancyMedicalProcedureController extends Controller
       $medical->procedure_id = $request->procedure_id;
       $medical->procedure_date = date_format(date_create_from_format('d/m/Y',$request->procedure_date),'Y-m-d');
       $medical->remarks = $request->remarks;
-      $medical->anganwadi_centre_id = 1;
+      $medical->anganwadi_centre_id = Auth::user()->area->area_id;
 
       $medical->save();
       Session::flash('success','Pregnancy Medical Procedure Added Successfully with ID: '.$medical->id);
