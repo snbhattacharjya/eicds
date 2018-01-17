@@ -68,13 +68,20 @@ Route::middleware('auth')->group(function(){
   Route::get('/fooddistribution/{member}/create', 'SupplementaryFoodDistributionController@create')->name('fooddistribution.create');
   Route::post('/fooddistribution', 'SupplementaryFoodDistributionController@store')->name('fooddistribution.store');
 
+  //Food Types
+  Route::get('/supplementaryfoodtype', 'SupplementaryFoodTypeController@index')->name('supplementaryfoodtype.index');
+  Route::post('/supplementaryfoodtype', 'SupplementaryFoodTypeController@store')->name('supplementaryfoodtype.store');
+
   //PreSchoolEducationRecord
   Route::get('/preschooleducation', 'PreSchoolEducationRecordController@index')->name('preschooleducation.index');
   Route::get('/preschooleducation/{member}/create', 'PreSchoolEducationRecordController@create')->name('preschooleducation.create');
   Route::post('/preschooleducation', 'PreSchoolEducationRecordController@store')->name('preschooleducation.store');
 
   //Preschool activity
+  Route::get('/preschoolactivity', 'PreSchoolActivityController@index')->name('preschoolactivity.index');
   Route::post('/preschoolactivity', 'PreSchoolActivityController@store')->name('preschoolactivity.store');
+
+  //Activity Preschool
   Route::post('/activitypreschool', 'ActivityPreSchoolController@store')->name('activitypreschool.store');
 
   //Immunization Record
@@ -83,6 +90,7 @@ Route::middleware('auth')->group(function(){
   Route::post('/immunization', 'ImmunizationRecordController@store')->name('immunization.store');
 
   //Vaccination
+  Route::get('/vaccination', 'VaccinationController@index')->name('vaccination.index');
   Route::post('/vaccination', 'VaccinationController@store')->name('vaccination.store');
 
   //Vitamin A Record
@@ -91,6 +99,7 @@ Route::middleware('auth')->group(function(){
   Route::post('/vitamina', 'VitaminADoseRecordController@store')->name('vitamina.store');
 
   //Vitamin A Doses
+  Route::get('/vitaminadose', 'VitaminADoseController@index')->name('vitaminadose.index');
   Route::post('/vitaminadose', 'VitaminADoseController@store')->name('vitaminadose.store');
 
   //PregnancyDeliveryRecord
@@ -103,6 +112,10 @@ Route::middleware('auth')->group(function(){
   //Pregnancy Medical Procedure
   Route::get('/pregnancydelivery/{id}/medicalprocedure', 'PregnancyDeliveryRecordController@showMedicalProcedure')->name('pregnancydelivery.medicalprocedure');
   Route::post('/pregnancymedicalprocedure','PregnancyMedicalProcedureController@store')->name('pregnancymedicalprocedure.store');
+
+  //Medical Procedures
+  Route::get('/medicalprocedure', 'MedicalProcedureController@index')->name('medicalprocedure.index');
+  Route::post('/medicalprocedure','MedicalProcedureController@store')->name('medicalprocedure.store');
 
   //Antenatal Checkup
   Route::get('/pregnancydelivery/{id}/antenatalcheckup', 'PregnancyDeliveryRecordController@showAnteNatalCheckup')->name('pregnancydelivery.antenatalcheckup');

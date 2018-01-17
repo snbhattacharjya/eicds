@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\SupplementaryFoodType;
 use Illuminate\Http\Request;
+use Session;
+use Illuminate\Support\Facades\Auth;
 
 class SupplementaryFoodTypeController extends Controller
 {
@@ -14,7 +16,8 @@ class SupplementaryFoodTypeController extends Controller
      */
     public function index()
     {
-        //
+      $food_types = SupplementaryFoodType::all();
+      return view('supplementaryfoodtype.index',['food_types' => $food_types]);
     }
 
     /**
@@ -35,7 +38,22 @@ class SupplementaryFoodTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+        'type_name' => 'required|string|max:255',
+      ]);
+      $food_type = new SupplementaryFoodType;
+      $food_type->type_name = $request->type_name;
+      if(Auth::user()->type == 'Central'){
+        $food_type->type = 'Central';
+      }
+      else{
+        $food_type->type = Auth::user()->type;
+        $food_type->area_id = Auth::user()->area->area_id;
+      }
+      $food_type->save();
+
+      Session::flash('success', 'New Supplementary Food Type Added Successfully with ID: '.$food_type->id);
+      return redirect()->route('supplementaryfoodtype.index');
     }
 
     /**

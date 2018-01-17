@@ -9,6 +9,7 @@ use App\Member;
 use App\PreSchoolActivity;
 use App\ActivityPreSchool;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PreSchoolEducationRecordController extends Controller
 {
@@ -35,7 +36,25 @@ class PreSchoolEducationRecordController extends Controller
     public function create(int $member_id)
     {
         $member = Member::find($member_id);
-        $activities = PreSchoolActivity::all();
+        $area = DB::table('states')
+            ->join('districts', 'states.id', '=', 'districts.state_id')
+            ->join('icds_projects', 'districts.id', '=', 'icds_projects.district_id')
+            ->join('sectors', 'icds_projects.id', '=', 'sectors.project_id')
+            ->join('anganwadi_centres', 'sectors.id', '=', 'anganwadi_centres.sector_id')
+            ->select('states.id as state_id', 'districts.id as district_id')
+            ->where([
+              ['anganwadi_centres.id', '=', Auth::user()->area->area_id],
+            ])
+            ->first();
+        $activities = PreSchoolActivity::where('type', '=', 'Central')
+                      ->orWhere(function ($query) use($area) {
+                          $query->where('type', '=', 'State')
+                                ->where('area_id', '=', $area->state_id);
+                        })
+                        ->orWhere(function ($query) use($area) {
+                            $query->where('type', '=', 'District')
+                                  ->where('area_id', '=', $area->district_id);
+                          })->get();
         $preschool_dates = ActivityPreSchool::select('preschool_date')->distinct()->get();
         return view('preschooleducation.create',['member' => $member, 'activities' => $activities, 'preschool_dates' => $preschool_dates]);
     }

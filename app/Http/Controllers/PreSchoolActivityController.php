@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\PreSchoolActivity;
 use Illuminate\Http\Request;
 use Session;
+use Illuminate\Support\Facades\Auth;
 class PreSchoolActivityController extends Controller
 {
     /**
@@ -14,7 +15,8 @@ class PreSchoolActivityController extends Controller
      */
     public function index()
     {
-        //
+        $activities = PreSchoolActivity::all();
+        return view('preschoolactivity.index',['activities' => $activities]);
     }
 
     /**
@@ -40,10 +42,17 @@ class PreSchoolActivityController extends Controller
         ]);
         $activity = new PreSchoolActivity;
         $activity->activity_name = $request->activity_name;
+        if(Auth::user()->type == 'Central'){
+          $activity->type = 'Central';
+        }
+        else{
+          $activity->type = Auth::user()->type;
+          $activity->area_id = Auth::user()->area->area_id;
+        }
         $activity->save();
 
         Session::flash('success', 'New PreSchool Activity Added Successfully with ID: '.$activity->id);
-        return redirect()->route('preschooleducation.create',['member' => $request->member_id]);
+        return redirect()->route('preschoolactivity.index');
     }
 
     /**

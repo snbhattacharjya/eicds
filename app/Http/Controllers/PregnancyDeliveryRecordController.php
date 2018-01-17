@@ -9,6 +9,7 @@ use Session;
 use App\MedicalProcedure;
 use App\PregnancyAntenatalCheckup;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PregnancyDeliveryRecordController extends Controller
 {
@@ -145,7 +146,25 @@ class PregnancyDeliveryRecordController extends Controller
     {
         $pd_record = PregnancyDeliveryRecord::find($pd_record_id);
         $member = Member::find($pd_record->member_id);
-        $procedures = MedicalProcedure::all();
+        $area = DB::table('states')
+            ->join('districts', 'states.id', '=', 'districts.state_id')
+            ->join('icds_projects', 'districts.id', '=', 'icds_projects.district_id')
+            ->join('sectors', 'icds_projects.id', '=', 'sectors.project_id')
+            ->join('anganwadi_centres', 'sectors.id', '=', 'anganwadi_centres.sector_id')
+            ->select('states.id as state_id', 'districts.id as district_id')
+            ->where([
+              ['anganwadi_centres.id', '=', Auth::user()->area->area_id],
+            ])
+            ->first();
+        $procedures = MedicalProcedure::where('type', '=', 'Central')
+                      ->orWhere(function ($query) use($area) {
+                          $query->where('type', '=', 'State')
+                                ->where('area_id', '=', $area->state_id);
+                        })
+                        ->orWhere(function ($query) use($area) {
+                            $query->where('type', '=', 'District')
+                                  ->where('area_id', '=', $area->district_id);
+                          })->get();
         return view('pregnancydelivery.show_medical_procedure',['member' => $member, 'pd_record' => $pd_record, 'procedures' => $procedures]);
     }
 

@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <div class="page-header">
-        <h1>Register No. 6 - Immunization Records for Children  <small></small></h1>
+        <h1>Register No. 7 - Vitamin A Dose Records for Children  <small></small></h1>
       </div>
       <div class="panel panel-default">
           <div class="panel-heading">List of Children </div>

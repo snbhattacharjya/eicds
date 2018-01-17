@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Vaccination;
 use Illuminate\Http\Request;
 use Session;
+use Illuminate\Support\Facades\Auth;
 class VaccinationController extends Controller
 {
     /**
@@ -14,7 +15,8 @@ class VaccinationController extends Controller
      */
     public function index()
     {
-        //
+        $vaccinations = Vaccination::all();
+        return view('vaccination.index',['vaccinations' => $vaccinations]);
     }
 
     /**
@@ -42,11 +44,18 @@ class VaccinationController extends Controller
 
         $vaccination = new Vaccination;
         $vaccination->vaccination_name = $request->vaccination_name;
+        if(Auth::user()->type == 'Central'){
+          $vaccination->type = 'Central';
+        }
+        else{
+          $vaccination->type = Auth::user()->type;
+          $vaccination->area_id = Auth::user()->area->area_id;
+        }
         $vaccination->due_month_from_birth = $request->due_month_from_birth;
 
         $vaccination->save();
         Session::flash('success','New Vaccination Added Successfully with ID:'.$vaccination->id);
-        return redirect()->route('immunization.create',['member' => $request->member_id]);
+        return redirect()->route('vaccination.index');
     }
 
     /**

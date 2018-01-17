@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\VitaminADose;
 use Illuminate\Http\Request;
 use Session;
+use Illuminate\Support\Facades\Auth;
 
 class VitaminADoseController extends Controller
 {
@@ -15,7 +16,8 @@ class VitaminADoseController extends Controller
      */
     public function index()
     {
-        //
+        $doses = VitaminADose::all();
+        return view('vitaminadose.index',['doses' => $doses]);
     }
 
     /**
@@ -43,11 +45,18 @@ class VitaminADoseController extends Controller
 
       $dose = new VitaminADose;
       $dose->dose_name = $request->dose_name;
+      if(Auth::user()->type == 'Central'){
+        $dose->type = 'Central';
+      }
+      else{
+        $dose->type = Auth::user()->type;
+        $dose->area_id = Auth::user()->area->area_id;
+      }
       $dose->due_month_from_birth = $request->due_month_from_birth;
 
       $dose->save();
       Session::flash('success','New Vitamin A Dose Added Successfully with ID:'.$dose->id);
-      return redirect()->route('vitamina.create',['member' => $request->member_id]);
+      return redirect()->route('vitaminadose.index');
     }
 
     /**

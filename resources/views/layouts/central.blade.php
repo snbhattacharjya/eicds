@@ -10,11 +10,11 @@
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Setup <span class="caret"></span></a>
     <ul class="dropdown-menu">
-      <li><a href="#">Food Distribution Types</a></li>
-      <li><a href="#">Preschool Activities</a></li>
-      <li><a href="#">Vaccination</a></li>
-      <li><a href="#">Vitamin Dose</a></li>
-      <li><a href="#">Pregnancy Medical Procedure</a></li>
+      <li><a href="{{url('/supplementaryfoodtype')}}">Supplementary Food Types</a></li>
+      <li><a href="{{url('/preschoolactivity')}}">Preschool Activities</a></li>
+      <li><a href="{{url('/vaccination')}}">Vaccinations</a></li>
+      <li><a href="{{url('/vitaminadose')}}">Vitamin Doses</a></li>
+      <li><a href="{{url('/medicalprocedure')}}">Pregnancy Medical Procedures</a></li>
     </ul>
   </li>
   <li class="dropdown">

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\MedicalProcedure;
 use Illuminate\Http\Request;
+use Session;
+use Illuminate\Support\Facades\Auth;
 
 class MedicalProcedureController extends Controller
 {
@@ -14,7 +16,8 @@ class MedicalProcedureController extends Controller
      */
     public function index()
     {
-        //
+      $procedures = MedicalProcedure::all();
+      return view('medicalprocedure.index',['procedures' => $procedures]);
     }
 
     /**
@@ -35,7 +38,22 @@ class MedicalProcedureController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+        'procedure_name' => 'required|string|max:255',
+      ]);
+      $procedure = new MedicalProcedure;
+      $procedure->procedure_name = $request->procedure_name;
+      if(Auth::user()->type == 'Central'){
+        $procedure->type = 'Central';
+      }
+      else{
+        $procedure->type = Auth::user()->type;
+        $procedure->area_id = Auth::user()->area->area_id;
+      }
+      $procedure->save();
+
+      Session::flash('success', 'New Medical Procedure Added Successfully with ID: '.$procedure->id);
+      return redirect()->route('medicalprocedure.index');
     }
 
     /**
