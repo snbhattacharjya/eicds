@@ -52,6 +52,6 @@ class LoginController extends Controller
         ]);
 
         $token = $request->input('g-recaptcha-response');
-        
+
     }
 }

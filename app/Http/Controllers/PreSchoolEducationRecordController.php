@@ -55,7 +55,7 @@ class PreSchoolEducationRecordController extends Controller
                             $query->where('type', '=', 'District')
                                   ->where('area_id', '=', $area->district_id);
                           })->get();
-        $preschool_dates = ActivityPreSchool::select('preschool_date')->distinct()->get();
+        $preschool_dates = ActivityPreSchool::where('anganwadi_centre_id','=',Auth::user()->area->area_id)->select('preschool_date')->distinct()->get();
         return view('preschooleducation.create',['member' => $member, 'activities' => $activities, 'preschool_dates' => $preschool_dates]);
     }
 

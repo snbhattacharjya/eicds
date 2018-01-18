@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\ActivityPreSchool;
 use Illuminate\Http\Request;
 use Session;
+use Illuminate\Support\Facades\Auth;
 
 class ActivityPreSchoolController extends Controller
 {
@@ -43,6 +44,7 @@ class ActivityPreSchoolController extends Controller
       $activity_preschool = new ActivityPreSchool;
       $activity_preschool->preschool_date = date_format(date_create_from_format('d/m/Y',$request->preschool_date),'Y-m-d');
       $activity_preschool->activity_id = $request->activity_id;
+      $activity_preschool->anganwadi_centre_id = Auth::user()->area->area_id;
       $activity_preschool->save();
 
       Session::flash('success', 'New PreSchool Day Added Successfully on: '.$activity_preschool->preschool_date);
