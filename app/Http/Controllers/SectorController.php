@@ -100,4 +100,9 @@ class SectorController extends Controller
     {
         //
     }
+
+    public function getSectors(Request $request){
+      $sectors = Sector::where('project_id',$request->project)->get()->toArray();
+      return response()->json($sectors,200);
+    }
 }

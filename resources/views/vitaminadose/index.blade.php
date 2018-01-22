@@ -5,7 +5,7 @@
     @include('layouts.message')
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-          <div class="panel panel-warning">
+          <div class="panel panel-danger">
               <div class="panel-heading">New Vitamin A Dose </div>
               <div class="panel-body">
                 <form class="form-horizontal" method="POST" action="{{ route('vitaminadose.store') }}">
@@ -47,6 +47,46 @@
                     </div>
                 </form>
               </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="panel panel-success">
+            <div class="panel-heading">Vitamin A Doses</div>
+            <div class="panel-body">
+              <table class="table table-bordered table-condensed table-striped">
+                <thead>
+                  <tr class="bg-primary">
+                    <th>#</th>
+                    <th>Dose ID</th>
+                    <th>Dose Name</th>
+                    <th>Due Month from Birth</th>
+                    <th>Supported By</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach ($doses as $dose)
+                    <tr>
+                      <td>{{$loop->iteration}}</td>
+                      <td>{{$dose['id']}}</td>
+                      <td>{{$dose['dose_name']}}</td>
+                      <td>{{$dose['due_month_from_birth']}}</td>
+                      <td>
+                        @if ($dose['type'] == 'Central')
+                          {{$dose['type']}}
+                        @else
+                          {{$dose['type']}} ({{$dose['supported_by']}})
+                        @endif
+                      </td>
+                      <td><a href="#" class="btn btn-sm btn-info">select</a.</td>
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

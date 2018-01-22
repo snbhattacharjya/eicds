@@ -6,6 +6,7 @@ use App\State;
 use App\District;
 use Illuminate\Http\Request;
 use Session;
+use Illuminate\Support\Facades\DB;
 
 class DistrictController extends Controller
 {
@@ -100,5 +101,10 @@ class DistrictController extends Controller
     public function destroy(District $district)
     {
         //
+    }
+
+    public function getDistricts(Request $request){
+      $districts = District::where('state_id',$request->state)->get()->toArray();
+      return response()->json($districts,200);
     }
 }

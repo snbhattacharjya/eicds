@@ -20,9 +20,14 @@
 Route::get('/', function () {
     return view('myindex');
 });
-// Route::get('/admin', function () {
-//     return view('adminlte');
-// });
+
+Route::get('/login/manage', 'ManageLoginController@index')->name('managelogin.index');
+Route::post('/login/central', 'ManageLoginController@loginCentral')->name('managelogin.central');
+Route::post('/login/state', 'ManageLoginController@loginState')->name('managelogin.state');
+Route::post('/login/district', 'ManageLoginController@loginDistrict')->name('managelogin.district');
+Route::post('/login/project', 'ManageLoginController@loginProject')->name('managelogin.project');
+Route::post('/login/sector', 'ManageLoginController@loginSector')->name('managelogin.sector');
+Route::post('/login/centre', 'ManageLoginController@loginCentre')->name('managelogin.centre');
 
 Auth::routes();
 

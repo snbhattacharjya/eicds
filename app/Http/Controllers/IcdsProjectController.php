@@ -100,4 +100,9 @@ class IcdsProjectController extends Controller
     {
         //
     }
+
+    public function getProjects(Request $request){
+      $projects = IcdsProject::where('district_id',$request->district)->get()->toArray();
+      return response()->json($projects,200);
+    }
 }

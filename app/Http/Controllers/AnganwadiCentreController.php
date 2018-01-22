@@ -14,6 +14,7 @@ class AnganwadiCentreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     
     public function index()
     {
         $sectors = Sector::all();
@@ -99,5 +100,10 @@ class AnganwadiCentreController extends Controller
     public function destroy(AnganwadiCentre $anganwadiCentre)
     {
         //
+    }
+
+    public function getCentres(Request $request){
+      $centres = AnganwadiCentre::where('sector_id',$request->sector)->get()->toArray();
+      return response()->json($centres,200);
     }
 }
