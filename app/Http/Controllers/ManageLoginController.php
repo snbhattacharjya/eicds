@@ -152,4 +152,21 @@ class ManageLoginController extends Controller
         return redirect()->route('managelogin.index');
     }
 
+    public function loginCtizen(Request $request)
+    {
+        $this->logout($request);
+        $user = DB::table('users')
+                ->join('area_user','users.id','=','area_user.user_id')
+                ->where([
+                  ['users.type','=','Center'],
+                  ['area_user.user_type','=','Center'],
+                  ['area_user.area_id','=',$request->center]
+                ])
+                ->select('users.*')
+                ->first();
+        $request->merge(['aadhaar' => $user->aadhaar, 'password' => 'secret']);
+        $this->login($request);
+        return redirect()->route('managelogin.index');
+    }
+
 }

@@ -1,4 +1,4 @@
-@extends('layouts.app_old')
+@extends('layouts.managelogin')
 
 @section('content')
   <div class="container">
@@ -138,6 +138,15 @@
                             </div>
                         </div>
 
+                    </form>
+
+                    <form class="form-horizontal" method="POST" action="{{ route('managelogin.citizen') }}">
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                          <div class="col-md-6 col-md-offset-3">
+                            <button type="submit" class="btn btn-lg btn-danger btn-block">Login Citizen</button>
+                          </div>
+                        </div>
                     </form>
 
                   </div>

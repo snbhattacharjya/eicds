@@ -6,6 +6,8 @@ use App\District;
 use App\IcdsProject;
 use Illuminate\Http\Request;
 use Session;
+use Illuminate\Support\Facades\Auth;
+use App\ExternalCitizen;
 
 class IcdsProjectController extends Controller
 {
@@ -104,5 +106,10 @@ class IcdsProjectController extends Controller
     public function getProjects(Request $request){
       $projects = IcdsProject::where('district_id',$request->district)->get()->toArray();
       return response()->json($projects,200);
+    }
+
+    public function showRegistrations(){
+      $external_citizens = ExternalCitizen::where('project_id',Auth::user()->area->area_id)->get();
+      return view('icdsproject.show_registrations',['external_citizens' => $external_citizens]);
     }
 }

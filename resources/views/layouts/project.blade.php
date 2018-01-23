@@ -19,3 +19,4 @@
     <li><a href="#">Weight Records</a></li>
   </ul>
 </li>
+<li><a href="{{url('/icdsproject/registrations')}}"><i class="fa fa-users"></i> Citizen Registration</a></li>

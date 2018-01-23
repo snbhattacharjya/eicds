@@ -60,14 +60,14 @@
                         AWC Locator &nbsp;</a></li>
                         <li class="nav-item"><a class="nav-link link text-white display-4" href="#"><span class="mbri-question mbr-iconfont mbr-iconfont-btn"></span>
                         RTI&nbsp;</a></li>
+                        <li class="nav-item"><a class="nav-link link text-white display-4" href="{{ url('/citizen/register') }}"><span class="mbri-users mbr-iconfont mbr-iconfont-btn"></span>
+                        Citizens &nbsp;</a></li>
                         @if (Auth::check())
                           <li class="nav-item"><a class="nav-link link text-white display-4" href="{{ url('/home') }}"><span class="mbri-user mbr-iconfont mbr-iconfont-btn"></span>
                           Go to My Account &nbsp;</a></li>
                         @else
                           <li class="nav-item"><a class="nav-link link text-white display-4" href="{{ url('/login') }}"><span class="mbri-login mbr-iconfont mbr-iconfont-btn"></span>
                           Login &nbsp;</a></li>
-                          <li class="nav-item"><a class="nav-link link text-white display-4" href="{{ url('/register') }}"><span class="mbri-touch mbr-iconfont mbr-iconfont-btn"></span>
-                          Register &nbsp;</a></li>
                         @endif
                       </ul>
 

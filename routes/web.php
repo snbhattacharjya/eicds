@@ -28,10 +28,17 @@ Route::post('/login/district', 'ManageLoginController@loginDistrict')->name('man
 Route::post('/login/project', 'ManageLoginController@loginProject')->name('managelogin.project');
 Route::post('/login/sector', 'ManageLoginController@loginSector')->name('managelogin.sector');
 Route::post('/login/centre', 'ManageLoginController@loginCentre')->name('managelogin.centre');
+Route::post('/login/citizen', 'ManageLoginController@loginCitizen')->name('managelogin.citizen');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Citizens
+Route::get('/citizen/login', 'Citizen\CitizenLoginController@showLoginForm')->name('citizen.login');
+Route::get('/citizen/register', 'Citizen\CitizenRegisterController@showRegistrationForm')->name('citizen.register');
+Route::post('/citizen/register', 'Citizen\CitizenRegisterController@register')->name('citizen.register');
+Route::get('/citizen/home', 'CitizenHomeController@index')->name('citizen.home');
 
 Route::middleware('auth')->group(function(){
   //States
@@ -43,6 +50,9 @@ Route::middleware('auth')->group(function(){
   //ICDS Projects
   Route::get('/icdsproject', 'IcdsProjectController@index')->name('icdsproject.index');
   Route::post('/icdsproject', 'IcdsProjectController@store')->name('icdsproject.store');
+  Route::get('/icdsproject/registrations', 'IcdsProjectController@showRegistrations')->name('icdsproject.registrations');
+    Route::get('/icdsproject/registration/{id}', 'IcdsProjectController@showRegistrationDetail')->name('icdsproject.registration');
+  Route::post('/icdsproject/registration', 'IcdsProjectController@registerCitizen')->name('icdsproject.register');
   //Sectors
   Route::get('/sector', 'SectorController@index')->name('sector.index');
   Route::post('/sector', 'SectorController@store')->name('sector.store');

@@ -18,7 +18,7 @@
                        Children in the age group 0-6 years constitute around 158 million of the population of India (2011 census). These Children are the future human resource of the country. Ministry of Women and Child Development is implementing various schemes for welfare, development and protection of children.
                   </p>
                   <div class="mbr-section-btn"><a class="btn btn-md btn-secondary display-4" href="index.html#content4-t"><span class="mbri-cart-add mbr-iconfont mbr-iconfont-btn"></span>Services</a>
-                      <a class="btn btn-md btn-danger display-4" href="index.html#counters2-v"><span class="mbri-like mbr-iconfont mbr-iconfont-btn"></span>Acheivements</a> <a class="btn btn-md btn-primary display-4" href="index.html#form1-y"><span class="mbri-users mbr-iconfont mbr-iconfont-btn"></span>Citizen Corner</a></div>
+                      <a class="btn btn-md btn-danger display-4" href="index.html#counters2-v"><span class="mbri-like mbr-iconfont mbr-iconfont-btn"></span>Acheivements</a> <a class="btn btn-md btn-primary display-4" href="index.html#form1-y"><span class="mbri-user mbr-iconfont mbr-iconfont-btn"></span>Citizen Corner</a></div>
               </div>
           </div>
       </div>
@@ -190,7 +190,7 @@
                           </div>
 
 
-                          <span class="input-group-btn"><button href="" type="submit" class="btn btn-primary btn-form display-4">SEND FORM</button></span>
+                          <span class="input-group-btn"><button href="" type="submit" class="btn btn-primary btn-form display-4">Sign In</button></span>
                       </form>
               </div>
           </div>
