@@ -9,6 +9,7 @@ use App\SupplementaryFoodType;
 use Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Traits\FoodDistributionCharts;
 
 class SupplementaryFoodDistributionController extends Controller
 {
@@ -17,6 +18,8 @@ class SupplementaryFoodDistributionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    use FoodDistributionCharts;
+
     public function index()
     {
         $members = Member::where([
@@ -133,5 +136,12 @@ class SupplementaryFoodDistributionController extends Controller
     public function destroy(SupplementaryFoodDistribution $supplementaryFoodDistribution)
     {
         //
+    }
+
+    public function monthlyProgress()
+    {
+      $monthly_progress = $this->centralMonthlyProgress();
+      $charts = ['monthly_progress' => $monthly_progress];
+      return view('fooddistribution.monthly_progress',['charts' => $charts]);
     }
 }

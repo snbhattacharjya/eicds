@@ -20,11 +20,18 @@
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports <span class="caret"></span></a>
     <ul class="dropdown-menu">
-      <li><a href="#">Supplementary Food Distribution</a></li>
+      <li><a href="{{url('/fooddistribution/progress/monthly')}}">Supplementary Food Distribution</a></li>
       <li><a href="#">Preschool Education</a></li>
       <li><a href="#">Pregnancy Delivery Records</a></li>
       <li><a href="#">Immunization</a></li>
       <li><a href="#">Vitamin A</a></li>
       <li><a href="#">Weight Records</a></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">API <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li><a href="{{url('/api/beneficiary/state')}}" target="_blank">Beneficiary State</a></li>
+      <li><a href="{{url('/beneficiary/district')}}" target="_blank">Beneficiary District</a></li>
     </ul>
   </li>

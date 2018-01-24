@@ -36,6 +36,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Citizens
 Route::get('/citizen/login', 'Citizen\CitizenLoginController@showLoginForm')->name('citizen.login');
+Route::post('/citizen/login', 'Citizen\CitizenLoginController@login')->name('citizen.login');
 Route::get('/citizen/register', 'Citizen\CitizenRegisterController@showRegistrationForm')->name('citizen.register');
 Route::post('/citizen/register', 'Citizen\CitizenRegisterController@register')->name('citizen.register');
 Route::get('/citizen/home', 'CitizenHomeController@index')->name('citizen.home');
@@ -82,6 +83,7 @@ Route::middleware('auth')->group(function(){
   Route::get('/fooddistribution', 'SupplementaryFoodDistributionController@index')->name('fooddistribution.index');
   Route::get('/fooddistribution/{member}/create', 'SupplementaryFoodDistributionController@create')->name('fooddistribution.create');
   Route::post('/fooddistribution', 'SupplementaryFoodDistributionController@store')->name('fooddistribution.store');
+  Route::get('/fooddistribution/progress/monthly', 'SupplementaryFoodDistributionController@monthlyProgress')->name('fooddistribution.monthly_progress');
 
   //Food Types
   Route::get('/supplementaryfoodtype', 'SupplementaryFoodTypeController@index')->name('supplementaryfoodtype.index');

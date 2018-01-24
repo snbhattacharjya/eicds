@@ -27,8 +27,6 @@ class CitizenHomeController extends Controller
      */
     public function index()
     {
-        $type = strtolower(Auth::user()->type);
-        $charts = $this->getDashboard($type,$type == 'central' ? '' : Auth::user()->area->area_id);
-        return view('dashboard.'.$type,['charts' => $charts]);
+        return view('citizen.home');
     }
 }

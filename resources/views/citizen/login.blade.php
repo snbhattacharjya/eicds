@@ -25,8 +25,8 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }} otp">
+                            <label for="password" class="col-md-4 control-label">OTP</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control" name="password" required>
@@ -39,7 +39,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group otp">
                             <div class="col-md-6 col-md-offset-4">
                                 <div class="checkbox">
                                     <label>
@@ -49,7 +49,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }} otp">
                           <div class="col-md-6 col-md-offset-4">
                             <div class="g-recaptcha" data-sitekey="6LdiukAUAAAAAPYwpNR9zazL_Pyufj9VwPmua-q6"></div>
                             @if ($errors->has('g-recaptcha-response'))
@@ -62,13 +62,13 @@
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary otp">
                                     Login
                                 </button>
+                                <button type="button" class="btn btn-primary" id="generate-otp">
+                                    Generate OTP
+                                </button>
 
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
                             </div>
                         </div>
                     </form>
@@ -77,4 +77,47 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+  <script type="text/javascript">
+    $(function(){
+      $('.otp').hide();
+    });
+    $('#generate-otp').on('click',function(){
+      if($('#aadhaar').val().length > 0){
+        var aadhaar = $('#aadhaar').val();
+        $.ajax({
+            mimeType: 'text/html; charset=utf-8', // ! Need set mimeType only when run from local file
+            url: "{{url('/api/citizen/login/otp')}}",
+            type: "POST",
+            data: {
+                aadhaar: aadhaar
+            },
+            success: function(data) {
+                var result=JSON.parse(JSON.stringify(data));
+                if(result.password != 'error'){
+                  $('#generate-otp').hide();
+                  $('.otp').show();
+                  //$('#aadhaar').prop('disabled',true);
+                  alert(result.password);
+                }
+                else{
+                  alert('Invalid Aadhaar!!!');
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            },
+            dataType: "json",
+            async: false
+        });
+
+      }
+      else{
+        alert('Aadhaar Field Empty!!!');
+      }
+
+    });
+  </script>
 @endsection

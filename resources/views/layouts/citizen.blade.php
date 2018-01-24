@@ -42,10 +42,13 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account  <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Caste Category</a></li>
-                  <li><a href="#">Target Types</a></li>
-                  <li><a href="#">Disability Types</a></li>
-                  <li><a href="#">ICDS Services</a></li>
+                  <li><a href="{{url('/citizen/familydetails')}}">Family Details</a></li>
+                  <li><a href="{{url('/citizen/snp')}}">Supplementary Nutrition</a></li>
+                  <li><a href="{{url('/citizen/preganancy')}}">Pregnancy Delivery Records</a></li>
+                  <li><a href="{{url('/citizen/immunisation')}}">Immunisation</a></li>
+                  <li><a href="{{url('/citizen/vitamina')}}">Vitamin A</a></li>
+                  <li><a href="{{url('/citizen/weight')}}">Weight Records</a></li>
+                  <li><a href="{{url('/citizen/preschool')}}">Pre School Education</a></li>
                 </ul>
               </li>
 

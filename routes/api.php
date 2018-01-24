@@ -21,3 +21,4 @@ Route::post('/districts', 'DistrictController@getDistricts');
 Route::post('/projects', 'IcdsProjectController@getProjects');
 Route::post('/sectors', 'SectorController@getSectors');
 Route::post('/centres', 'AnganwadiCentreController@getCentres');
+Route::post('/citizen/login/otp', 'Citizen\CitizenLoginController@generateOTP');
