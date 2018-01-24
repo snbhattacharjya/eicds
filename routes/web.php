@@ -41,6 +41,15 @@ Route::get('/citizen/register', 'Citizen\CitizenRegisterController@showRegistrat
 Route::post('/citizen/register', 'Citizen\CitizenRegisterController@register')->name('citizen.register');
 Route::get('/citizen/home', 'CitizenHomeController@index')->name('citizen.home');
 
+Route::get('/citizen/familydetails', 'CitizenHomeController@familydetails')->name('citizen.familydetails');
+Route::get('/citizen/snp', 'CitizenHomeController@snp')->name('citizen.snp');
+Route::get('/citizen/pregnancy', 'CitizenHomeController@pregnancy')->name('citizen.pregnancy');
+Route::get('/citizen/immunization', 'CitizenHomeController@immunization')->name('citizen.immunization');
+Route::get('/citizen/vitamina', 'CitizenHomeController@vitamina')->name('citizen.vitamina');
+Route::get('/citizen/weightrecords', 'CitizenHomeController@weightrecords')->name('citizen.weightrecords');
+Route::get('/citizen/preschool', 'CitizenHomeController@preschool')->name('citizen.preschool');
+Route::get('/citizen/migrations', 'CitizenHomeController@migrations')->name('citizen.migrations');
+
 Route::middleware('auth')->group(function(){
   //States
   Route::get('/state', 'StateController@index')->name('state.index');

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Session;
 use App\FamilyMigration;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MemberController extends Controller
 {
@@ -164,5 +165,43 @@ class MemberController extends Controller
 
         Session::flash('success','Member Imported Successfully with ID: '.$member->id);
         return redirect()->route('familydetail.showMembers',['family_id' => $member->family_id]);
+    }
+
+    public function getStateBeneficiaries(){
+      $data = DB::table('states')
+          ->join('districts','states.id','=','districts.state_id')
+          ->join('icds_projects', 'districts.id', '=', 'icds_projects.district_id')
+          ->join('sectors', 'icds_projects.id', '=', 'sectors.project_id')
+          ->join('anganwadi_centres', 'sectors.id', '=', 'anganwadi_centres.sector_id')
+          ->join('members', 'anganwadi_centres.id', '=', 'members.anganwadi_centre_id')
+          ->join('target_types', 'members.target_id', '=', 'target_types.id')
+          ->select('states.state_name', 'target_types.target_name')
+          ->selectRaw('COUNT(*) as Count')
+          ->where([
+            ['members.active_status', '=', 1],
+          ])
+          ->whereNotIn('members.target_id',[5])
+          ->groupBy('states.state_name', 'target_types.target_name')
+          ->get()->toArray();
+      return response()->json($data,200);
+    }
+
+    public function getDistrictBeneficiaries(){
+      $data = DB::table('states')
+          ->join('districts','states.id','=','districts.state_id')
+          ->join('icds_projects', 'districts.id', '=', 'icds_projects.district_id')
+          ->join('sectors', 'icds_projects.id', '=', 'sectors.project_id')
+          ->join('anganwadi_centres', 'sectors.id', '=', 'anganwadi_centres.sector_id')
+          ->join('members', 'anganwadi_centres.id', '=', 'members.anganwadi_centre_id')
+          ->join('target_types', 'members.target_id', '=', 'target_types.id')
+          ->select('districts.district_name', 'target_types.target_name')
+          ->selectRaw('COUNT(*) as Count')
+          ->where([
+            ['members.active_status', '=', 1],
+          ])
+          ->whereNotIn('members.target_id',[5])
+          ->groupBy('districts.district_name', 'target_types.target_name')
+          ->get()->toArray();
+      return response()->json($data,200);
     }
 }

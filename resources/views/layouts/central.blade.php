@@ -32,6 +32,6 @@
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">API <span class="caret"></span></a>
     <ul class="dropdown-menu">
       <li><a href="{{url('/api/beneficiary/state')}}" target="_blank">Beneficiary State</a></li>
-      <li><a href="{{url('/beneficiary/district')}}" target="_blank">Beneficiary District</a></li>
+      <li><a href="{{url('/api/beneficiary/district')}}" target="_blank">Beneficiary District</a></li>
     </ul>
   </li>

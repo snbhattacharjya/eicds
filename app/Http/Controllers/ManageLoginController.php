@@ -33,6 +33,7 @@ class ManageLoginController extends Controller
         return $this->sendLoginResponse($request);
     }
 
+
     protected function sendLoginResponse(Request $request)
     {
         $request->session()->regenerate();
@@ -50,6 +51,13 @@ class ManageLoginController extends Controller
         $request->session()->invalidate();
 
         return;
+    }
+
+    protected function attemptLogin(Request $request)
+    {
+          return $this->guard()->attempt(
+              $this->credentials($request), $request->filled('remember')
+          );
     }
 
     public function index()
@@ -152,19 +160,15 @@ class ManageLoginController extends Controller
         return redirect()->route('managelogin.index');
     }
 
-    public function loginCtizen(Request $request)
+    public function loginCitizen(Request $request)
     {
         $this->logout($request);
-        $user = DB::table('users')
-                ->join('area_user','users.id','=','area_user.user_id')
-                ->where([
-                  ['users.type','=','Center'],
-                  ['area_user.user_type','=','Center'],
-                  ['area_user.area_id','=',$request->center]
-                ])
-                ->select('users.*')
-                ->first();
-        $request->merge(['aadhaar' => $user->aadhaar, 'password' => 'secret']);
+        $password = bcrypt(mt_rand(1234,5678));
+        DB::table('citizens')
+                ->where('aadhaar','397568560883')
+                ->update(['password' => $password]);
+
+        $request->merge(['aadhaar' => '397568560883', 'password' => $password, 'type' => 'citizen']);
         $this->login($request);
         return redirect()->route('managelogin.index');
     }

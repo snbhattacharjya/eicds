@@ -31,24 +31,25 @@
             <a class="navbar-brand" href="{{url('/')}}">
               <img alt="{{config('app.name')}}" src="{{asset('mobirise/images/icds-logo-transparent1-689x661.png')}}" height="25" width="25">
             </a>
-            <a class="navbar-brand" href="{{url('/start')}}">{{config('app.name')}}</a>
+            <a class="navbar-brand" href="{{url('/')}}">{{config('app.name')}}</a>
           </div>
 
-          @if (Auth::check())
+          @if (Auth::guard('citizen')->check())
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
 
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account  <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Family Records  <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="{{url('/citizen/familydetails')}}">Family Details</a></li>
                   <li><a href="{{url('/citizen/snp')}}">Supplementary Nutrition</a></li>
                   <li><a href="{{url('/citizen/preganancy')}}">Pregnancy Delivery Records</a></li>
-                  <li><a href="{{url('/citizen/immunisation')}}">Immunisation</a></li>
+                  <li><a href="{{url('/citizen/immunization')}}">Immunisation</a></li>
                   <li><a href="{{url('/citizen/vitamina')}}">Vitamin A</a></li>
-                  <li><a href="{{url('/citizen/weight')}}">Weight Records</a></li>
+                  <li><a href="{{url('/citizen/weightrecords')}}">Weight Records</a></li>
                   <li><a href="{{url('/citizen/preschool')}}">Pre School Education</a></li>
+                  <li><a href="{{url('/citizen/migrations')}}">Family Migrations</a></li>
                 </ul>
               </li>
 
