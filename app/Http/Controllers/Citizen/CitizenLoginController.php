@@ -72,6 +72,7 @@ class CitizenLoginController extends Controller
         $citizen = Citizen::where('aadhaar',$request->aadhaar)->first();
         if(count($citizen) > 0){
           $citizen->password = bcrypt($password);
+          $citizen->family_id = $member->family_id;
           $citizen->save();
           return response()->json(['password' => $password],200);
         }

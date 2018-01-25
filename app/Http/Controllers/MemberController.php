@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Member;
+use App\FamilyDetail;
 use Illuminate\Http\Request;
 use Session;
 use App\FamilyMigration;
@@ -122,11 +123,12 @@ class MemberController extends Controller
       $request->validate([
         'aadhaar' => 'required|digits:12',
       ]);
+      $family_head = FamilyDetail::where('id',$request->family_id)->pluck('hof_name')->first();
       $member = Member::where([
         ['aadhaar', '=', $request->aadhaar],
-        ['anganwadi_centre_id', '<>', Auth::user()->area->area_id],
+        //['anganwadi_centre_id', '<>', Auth::user()->area->area_id],
         ])->first();
-      return view('familydetail.show_member_import',['member' => $member, 'family_id' => $request->family_id]);
+      return view('familydetail.show_member_import',['member' => $member, 'family_id' => $request->family_id, 'family_head' => $family_head]);
     }
 
     public function import(Request $request)

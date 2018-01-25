@@ -15,6 +15,7 @@ class CreateCitizensTable extends Migration
     {
         Schema::create('citizens', function (Blueprint $table) {
             $table->integer('id')->primary();
+            $table->integer('family_id');
             $table->string('name');
             $table->string('aadhaar',12)->unique();
             $table->string('mobile',10)->unique();

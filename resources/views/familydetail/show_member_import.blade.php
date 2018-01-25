@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
           <div class="panel panel-default">
-              <div class="panel-heading">Confirm Import of New Member</div>
+              <div class="panel-heading">Confirm Import of New Member to the family of <strong>{{$family_head}}</strong></div>
 
               <div class="panel-body">
                 <dl class="dl-horizontal well">

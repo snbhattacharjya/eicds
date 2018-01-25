@@ -8,7 +8,7 @@
                 <div class="panel-heading">Citizen Dashboard</div>
 
                 <div class="panel-body">
-                    Welcome Citizen {{Auth::user()}}
+                    Welcome Citizen 
                 </div>
             </div>
         </div>

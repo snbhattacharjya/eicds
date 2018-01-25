@@ -99,8 +99,8 @@
                 if(result.password != 'error'){
                   $('#generate-otp').hide();
                   $('.otp').show();
-                  //$('#aadhaar').prop('disabled',true);
-                  alert(result.password);
+                  $('#aadhaar').prop('readonly',true);
+                  console.log(result.password);
                 }
                 else{
                   alert('Invalid Aadhaar!!!');
