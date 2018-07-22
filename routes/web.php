@@ -77,6 +77,16 @@ Route::middleware('auth')->group(function(){
   Route::post('/familydetail', 'FamilyDetailController@store')->name('familydetail.store');
   Route::get('/familydetail/{familydetail}/members', 'FamilyDetailController@showMembers')->name('familydetail.showMembers');
 
+  //Import Member as Family
+  Route::get('/familydetail/member/newfamily', 'FamilyDetailController@memberNewFamily')->name('familydetail.memberNewFamily');
+  Route::post('/familydetail/member/newfamily/show', 'FamilyDetailController@showMemberNewFamily')->name('familydetail.showMemberNewFamily');
+  Route::post('/familydetail/member/importnewfamily', 'FamilyDetailController@importMemberAsNewfamily')->name('familydetail.importMemberAsNewfamily');
+
+  //Merge Families
+  Route::get('/familydetail/member/mergefamily', 'FamilyDetailController@memberMergeFamily')->name('familydetail.memberMergeFamily');
+  Route::post('/familydetail/member/mergefamily/show', 'FamilyDetailController@showMemberMergeFamily')->name('familydetail.showMemberMergeFamily');
+  Route::post('/familydetail/member/mergefamily', 'FamilyDetailController@mergeFamily')->name('familydetail.mergeFamily');
+
   //Member
   Route::post('/member', 'MemberController@store')->name('member.store');
 

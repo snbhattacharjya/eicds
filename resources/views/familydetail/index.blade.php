@@ -45,8 +45,8 @@
         <ul class="nav nav-pills nav-stacked">
           <li role="presentation"><a href="{{url('familydetail/create')}}"><label class="text-danger"><i class="fa fa-plus-square"></i> New Family</label></a></li>
           <li role="presentation"><a href="{{url('familydetail/search')}}"><label class="text-success"><i class="fa fa-external-link"></i> Import Family</label></a></li>
-          <li role="presentation"><a href="{{url('familydetail/member/search')}}"><label class="text-primary"><i class="fa fa-external-link"></i> Import Member as New Family</label></a></li>
-          <li role="presentation"><a href="{{url('familydetail/member/search')}}"><label class="text-primary"><i class="fa fa-external-link"></i> Merge Families</label></a></li>
+          <li role="presentation"><a href="{{url('familydetail/member/newfamily')}}"><label class="text-primary"><i class="fa fa-external-link"></i> Import Member as New Family</label></a></li>
+          <li role="presentation"><a href="{{url('familydetail/member/mergefamily')}}"><label class="text-primary"><i class="fa fa-external-link"></i> Merge Families</label></a></li>
         </ul>
       </div>
     </div>

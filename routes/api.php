@@ -23,5 +23,7 @@ Route::post('/sectors', 'SectorController@getSectors');
 Route::post('/centres', 'AnganwadiCentreController@getCentres');
 Route::post('/citizen/login/otp', 'Citizen\CitizenLoginController@generateOTP');
 
+Route::get('/generate-otp', 'FamilyDetailController@generateOTP');
+
 Route::get('/beneficiary/state','MemberController@getStateBeneficiaries');
 Route::get('/beneficiary/district','MemberController@getDistrictBeneficiaries');

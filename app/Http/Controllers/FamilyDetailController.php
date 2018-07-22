@@ -229,4 +229,53 @@ class FamilyDetailController extends Controller
       Session::flash('success','Family Imported Successfully with ID: '.$family->id);
       return redirect('/familydetail');
     }
+
+    public function memberNewFamily()
+    {
+      return view('familydetail.member_new_family');
+    }
+
+    public function showMemberNewFamily(Request $request)
+    {
+      $request->validate([
+        'aadhaar' => 'required|digits:12',
+      ]);
+      $member = Member::where([
+        ['aadhaar', '=', $request->aadhaar],
+        ])->first();
+      return view('familydetail.show_member_new_family',['member' => $member]);
+    }
+
+    public function importMemberAsNewFamily(Request $request)
+    {
+
+    }
+
+    public function memberMergeFamily()
+    {
+      return view('familydetail.member_merge_family');
+    }
+
+    public function showMemberMergeFamily(Request $request)
+    {
+      $request->validate([
+        'aadhaar' => 'required|digits:12',
+      ]);
+      $member = Member::where([
+        ['aadhaar', '=', $request->aadhaar],
+        ])->first();
+      return view('familydetail.show_member_merge_family',['member' => $member]);
+    }
+
+    public function mergeFamily(Request $request)
+    {
+
+    }
+
+
+    public function generateOTP(Request $request)
+    {
+      $otp = mt_rand(1234,5678);
+      return response()->json(['otp' => $otp],200);
+    }
 }

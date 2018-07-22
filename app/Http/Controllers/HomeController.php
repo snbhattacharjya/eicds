@@ -31,4 +31,5 @@ class HomeController extends Controller
         $charts = $this->getDashboard($type,$type == 'central' ? '' : Auth::user()->area->area_id);
         return view('dashboard.'.$type,['charts' => $charts]);
     }
+
 }
